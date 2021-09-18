@@ -52,28 +52,27 @@ $p_2$ & $b$   & $c$   & $c$   & $c$   & $c$   \\ \hline
 \end{table}
 
 \section{Match And Freeze Modification}
-In this section we try to modify the Match and Freeze algorithm in order to obtain an EFX allocation with additive valuation functions with three values for only two players. As first thing we can notice from the counter example used before that a problem with three values is that the frozen player $p_1$ can envy the non frozen player $p_2$ since $p_2$ takes to many items that $p_1$ values as $b$ 
+In this section we try to modify the Match and Freeze algorithm in order to obtain an EFX allocation with additive valuation functions with three values for only two players. As first thing we can notice from the counter example used before that a problem with three values is that the frozen player $p_1$ can envy the non frozen player $p_2$ since while $p_1$ is frozen, $p_2$ has to get $\left \lfloor \frac{b}{c}\right \rfloor -1$ items with value $c$ but that can have value $b$ for $p_1$, so the value of the items taken by $p_2$ while $p_1$ is frozen for $p_1$ can be $\left \lfloor \frac{b}{c}\right \rfloor b - b$ that is higher than $a$ if $\left \lfloor \frac{b}{c}\right \rfloor > \left \lfloor \frac{a}{b}\right \rfloor$
 \gb{Rephrase this a bit: The actual problem is that $p_2$ needs to take too many goods of value c in order to "catch" $p_1$. While this happens, $p_1$ loses to much  value because $p_2$ takes items that have value b for her. Highlight that the problem is that the multiplicative distance between a and b, is much smaller than the one of b and c)}. 
-In order to solve this problem the first idea has been to run the algorithm till the end and then, if there is a non EFX allocation
+In order to solve this problem the first idea has been to run the algorithm till the end and then, if the produced allocation is not EFX
 \gb{Rephrase: If the produced allocation is not EFX}
-, go back to the assignment that froze player $p_1$ and change the assignment.
+, go back to the assignment that froze the first player and assign the item that went to $p_1$ to $p_2$ and vice versa.
 \gb{Change the assignment in what way? Add a small explanation here.}
-Moreover we have to redefine the number of iterations for which a player is frozen in order to adapt it to the three value case. In this case we will have a variable number of iterations that depends on the remaining items and on the values obtained by the two players. Let's consider that $p_k$ took item $i_h$ and $p_l$ took item $i_j$
-\gb{Instead of having $k$ and $l$ which is a bit confusing, you can say that w.l.o.g. $p_1$ was assigned with item $i_h$ and $p_2$ was assigned with item $i_j$}
-the cases in which we freeze player $p_k$ are: 
+Moreover we have to redefine the number of iterations for which a player is frozen in order to adapt it to the three value case. In this case we will have a variable number of iterations that depends on the remaining items and on the values obtained by the two players. Without loss of generality let's consider that $p_1$ took item $x$ and $p_2$ took item $y$,
+\gb{Instead of having $k$ and $l$ which is a bit confusing, you can say that w.l.o.g. $p_1$ was assigned with item $x$ and $p_2$ was assigned with item $y$}
+the cases in which we freeze player $p_1$ are: 
 \begin{itemize}
-    \item $v_l(i_h) = a,\; v_l(i_j) =  b$ in this case we have that $p_l$ can still take items with value $b$ and $c$. We will unfroze $p_k$ only when $p_l$ has obtained a set of items while $p_k$ is frozen $F$ formed by $\lfloor \frac{a-b}{b}\rfloor$ items valued $b$ and $k$ items valued $c$ such that
+    \item $v_2(x) = a,\; v_2(y) =  b$ in this case we have that $p_2$ can still take items with value $b$ and $c$. We will unfroze $p_1$ only when $p_2$ has obtained a set of items $F$ while $p_1$ is frozen such that
     \begin{equation}
-        a-b\ge v_j(F) = \lfloor \frac{a-b}{b}\rfloor b + kc \ge a-b-c
+        a-b\ge v_2(F)\ge a-b-c
         \label{eq:constraint-value-freeze-a-b-c}
     \end{equation}
     \gb{What is $v_j$ (the index $j$ is not introduced), and what is $F$ (again this is not introduced)?}
-    If the $\lfloor\frac{a-b}{b}\rfloor$ items with value $b$ are not present, then we should take all the items with value $b$ possible, and reach the above constraint with items of value $c$.
+    The set of items $F$ is obtained by first taking all the items with value $b$ for $p_2$ by respecting that $a-b\ge v_2(F)$, than by taking items with value $c$ for $p_2$ in order to respect the constraint described in equation \ref{eq:constraint-value-freeze-a-b-c}.
     \gb{Rephrase this a bit: Take every item of value b, and reach...}
-    In order to obtain this we will assign first the available items valued $b$ by $p_l$ till reaching $v_j(F) > a-2b$ and then, also if there are other items with value $b$ for $p_l$, assign items with value $c$ in order to respect the constraint described above.
     \gb{Rephrase this a bit: It is not that clear to me what you mean}
-    \item $v_l(i_h) = a,\; v_l(i_j) =  c$ in this case we have that $p_l$ can still take items only with value $c$, so $p_k$ will be frozen for $\lfloor \frac{a-c}{c}\rfloor = \lfloor \frac{a}{c}\rfloor - 1$.
-    \item $v_l(i_h) = b,\; v_l(i_j) =  c$ in this case we have that $p_l$ can still take items only with value $c$, so $p_k$ will be frozen for $\lfloor \frac{b-c}{c}\rfloor = \lfloor \frac{b}{c}\rfloor - 1$.
+    \item $v_2(x) = a,\; v_2(y) =  c$ in this case we have that $p_2$ can still take items only with value $c$, so $p_1$ will be frozen for $\left\lfloor \frac{a-c}{c}\right \rfloor =\left \lfloor \frac{a}{c}\right \rfloor - 1$.
+    \item $v_l(x) = b,\; v_l(y) =  c$ in this case we have that $p_l$ can still take items only with value $c$, so $p_k$ will be frozen for $\left \lfloor \frac{b-c}{c}\right \rfloor =\left  \lfloor \frac{b}{c}\right \rfloor - 1$.
 \end{itemize}
 In order to show that this approach is effective, we have to better define the kind of assignment that could lead to a non EFX allocation at the end, so also show that the other assignment will lead always to an EFX allocation, and that by changing the assignment if the obtained result is not EFX, that we obtain surely an EFX allocation.
 \paragraph{}
@@ -83,34 +82,35 @@ We can define a problematic assignment as an assignment after which $p_i$ is fro
     \item Freeze only players who can still take only items with value $c$ 
 \end{enumerate}
 
-Is easy to see that in the first case we will have an EFX allocation since $v_1(A_1[l])\ge v_1(A_2[l])\; \forall l \in \{1,2,\cdots,k\}$ where $k = \min (|A_1|, |A_2|)$ (the same hold for $p_2$).
+Is easy to see that in the first case we will have an EFX allocation since $v_1(A_1[l])\ge v_1(A_2[l])\; \forall l \in \{1,2,\cdots,k\}$ where $k = \min (|A_1|, |A_2|)$ where $A_i[j]$ is the $j$-th item took by player $i$ (the same holds for $p_2$).
 \gb{Define what $A_1[l]$ is}
 So we have that if $p_1$ and $p_2$ get the same number of items they are envy-free, otherwise they are EFX since the last item taken by one of the two players will have the smallest value for the other player.\\
-In the second case we can observe that only one player will be frozen during the execution of the algorithm because if there are no problematic assignments, when a player is frozen, then it can only take items with value 
+In the second case we can observe that only one player will be frozen during the execution of the algorithm because if there are no problematic assignments, when a player $p_i$ is frozen, then it can only take items with value $c$ for him
 \gb{Value c for whom? You probably mean that if a player is frozen, then the other player can take items that have value c for the frozen player?}
-so it will not generate other assignments in which a player can be frozen. In order to show that only when there are problematic assignments the algorithm can generate non EFX allocations we have to show that when a player is frozen but all the remaining items have value $c$ for him, then the algorithm will produce an EFX allocation.
-Let's consider that at iteration $i$ $p_1$ is frozen, before iteration $i$ we have that $v_1(A_1[l])\ge v_1(A_2[l]) \; \forall l \in \{1,2,\cdots, i-1\}$ and $v_2(A_2[l]) \ge v_2(A_1[l])\;\forall l \in \{1,2,\cdots,i-1\}$ while after that $p_1$ is unfrozen
+so the algorithm will not generate other assignments in which a player can be frozen, indeed the only type of assignment that can generate a second freeze needs to have both players with an item with value $b$ like shown in Table \ref{table:bbcc-block}. In order to show that only when there are problematic assignments the algorithm can generate non EFX allocations we have to show that when a player is frozen but all the remaining items have value $c$ for him, then the algorithm will produce an EFX allocation.
+Let's consider that at iteration $i$ the algorithm freezes $p_1$, before iteration $i$ we have that $v_1(A_1[l])\ge v_1(A_2[l]) \; \forall l \in \{1,2,\cdots, i-1\}$ and $v_2(A_2[l]) \ge v_2(A_1[l])\;\forall l \in \{1,2,\cdots,i-1\}$,  instead from the iteration in which $p_1$ is unfrozen
 \gb{You mean frozen or you mean the iteration when $p_1$ will not be frozen any more?}
 , $p_2$ takes a number of items that is $z$ while $p_1$ will take or $z$ or $z-1$ items since at the end we give precedence to the player that has not been frozen.
 \gb{So here we want to say that before player $i$ is frozen, both players do not envy each other, while after $p_1$ is unfrozen both players will get almost the same number of items.}
 Let's define $F$ to be the set of items that $p_2$ has taken while $p_1$ was frozen and let's analyze the different cases:
 \gb{This $F$ is the same as the one that was defined before? TO DO: Check the notation again. Also we can name items just x and y for convenience or have indexes $h$ for high and $l$ for low, so that it is easier for the reader to follow.}
 \begin{enumerate}
-    \item $p_1$ took item $i_j: v_1(i_j) = a$
+    \item $p_1$ took item $x: v_1(x) = a$
     \begin{enumerate}
-        \item $p_2$ took item $i_p:v_2(i_p) = b$ and $v_2(i_j) = a$ 
+        \item $p_2$ took item $y:v_2(y) = b$ and $v_2(x) = a$ \label{enumerate:non-problematic-assigment-case-aba}
         %\begin{itemize}
             %\item $p_1$ EFX to $p_2$: we have that the larger amount of iterations that $p_1$ can be frozen is $\lfloor \frac{a-b}{c}\rfloor$ so in this case $v_1(F) \le \lfloor \frac{a-b}{c}\rfloor c \le a-b$. This implies that $v_1(A_1) \ge v_1(A_1^*) + a + (z-1) c$. Instead for what concerns the valuation of player $p_1$ for the items obtained by $p_2$ we can write the following: 
             %\begin{align*}
 %v_1(A_2) &\le v_1(A_2^*) + b + v_1(F) + zc\\&\le v_1(A_1^*) + b + a - b + zc = (i-1)a + a + zc      
 %\end{align*}    
         %\end{itemize}
-        \item $p_2$ took item $i_p: v_2(i_p) = c$ and $v_2(i_j) = a$
-        \item $p_2$ took item $i_p: v_2(i_p) = c$ and $v_2(i_j) = b$
+        \item $p_2$ took item $y: v_2(y) = c$ and $v_2(x) = a$ \label{enumerate:non-problematic-assigment-case-aca}
+        \item $p_2$ took item $y: v_2(y) = c$ and $v_2(x) = b$ \label{enumerate:non-problematic-assigment-case-acb}
     \end{enumerate}
-    \item $p_1$ took item $i_j: v_1(i_j) = b$
+    \item $p_1$ took item $x: v_1(x) = b$
     \begin{enumerate}
-        \item $p_2$ took item $i_p: v_2(i_p) = c$ and $v_2(i_j) = b$
+        \item $p_2$ took item $y: v_2(y) = c$ and $v_2(x) = b$
+        \label{enumerate:non-problematic-assigment-case-bcb}
     \end{enumerate}
 \end{enumerate}
 %By considering $F$ to be the set of items that $p_2$ takes while $p_1$ is frozen, we have that $v_1(f) \le v_2(f) \; \forall f\in F$. So we 
@@ -126,28 +126,35 @@ Let's define $F$ to be the set of items that $p_2$ has taken while $p_1$ was fro
 %v_1(A_2) &\le (i-1)a + b + v_1(F) + zc\\&\le (i-1)a + b + a - c + zc = (i-1)a + a + zc      
 %\end{align*}
 %So we have that $p_1$ is EFX towards $p_2$
-We can see in all the above cases that, since $p_1$ values all the remaining items as $c$, he will always be EFX towards $p_2$. Instead for what concerns $p_2$ we can notice that in the last two cases $v_2(F) > b-2c$, so we have that 
+We can see in all the above cases that, since $p_1$ values all the remaining items as $c$, he will always be EFX towards $p_2$.
+\paragraph{Case 1c and 2a}
+Instead for what concerns $p_2$ in the case \ref{enumerate:non-problematic-assigment-case-acb} and \ref{enumerate:non-problematic-assigment-case-bcb} we can observe that at the end of the algorithm the set of items obtained by $p_2$: $A_2$ will be formed by $A_2^*$ that is the set of items obtained by $p_2$ before that $p_1$ is frozen, item $y$ obtained in the iteration in which $p_1$ is frozen, the set of items $F$ that contains the items obtained by $p_2$ while $p_1$ was frozen and $z$ items with value $c$ obtained from the iteration in which $p_1$ is unfrozen. Instead we have that $A_1$ will be formed by $A_1^*$, item $x$ that $p_1$ obtained in the iteration that causes him to be frozen and at most $z$ items with value $c$ for both players obtained after that he has been unfrozen. We can notice that case  \ref{enumerate:non-problematic-assigment-case-acb} and \ref{enumerate:non-problematic-assigment-case-bcb} we can write $v_2(F) > b-2c$, so we have that 
 \gb{Although I understand the point of these equations, the notation is not clear and some things have to be introduced earlier, e.g. What is $A^*$}
 \begin{align*}
-    v_2(A_2) &= v_2(A_2^*) + v_2(i_p) + v_2(F) + zc\\
+    v_2(A_2) &= v_2(A_2^*) + v_2(y) + v_2(F) + zc\\
     &= v_2(A_2^*) + c + v_2(F) + zc > v_2(A_2^*) + b-c + zc\\
     \\
-    v_2(A_1) &= v_2(A_1^*) + v_2(i_j) + zc\\
+    v_2(A_1) &= v_2(A_1^*) + v_2(x) + zc\\
     &=v_2(A_1^*) + b + zc\le v_2(A_2^*) + b + zc
 \end{align*}
 \gb{You explain what $A^*$ is here, but as I said maybe is better to introduce is earlier. Add that index $k \in \{1,2\}$}
-Where $v_i(A_k^*)$ is the value for $p_i$ for the set of items obtained by $p_k$ before the freeze and we have that $v_2(A_1^*)\le v_2(A_2^*)$.
-So the allocation in the last two cases is EFX. In the second case we obtain the same thing as for the last two cases with the only difference that $v_2(F) > a-2c$, so we have that \gb{I am a bit lost with the case e.g. you say that in the second case we obtain the same thing as in the last two cases. This is confusing, I would say that it is better to use the names of the cases so that it is clear to the reader.}
+Where we have that $v_2(A_1^*)\le v_2(A_2^*)$.
+So the allocation produced by the algorithm in the case \ref{enumerate:non-problematic-assigment-case-acb} and \ref{enumerate:non-problematic-assigment-case-bcb} is EFX.
+
+\paragraph{Case 1b}
+In case  \ref{enumerate:non-problematic-assigment-case-aca} we obtain the same thing as for the case  \ref{enumerate:non-problematic-assigment-case-acb} and \ref{enumerate:non-problematic-assigment-case-bcb} described above, with the only difference that $v_2(F) > a-2c$, so we have that 
+\gb{I am a bit lost with which case is examined e.g. you say that in the second case we obtain the same thing as in the last two cases. This is confusing, I would say that it is better to use the names of the cases so that it is clear to the reader.}
 \begin{align*}
-    v_2(A_2) &= v_2(A_2^*) + v_2(i_p) + v_2(F) + zc\\
+    v_2(A_2) &= v_2(A_2^*) + v_2(y) + v_2(F) + zc\\
     &= v_2(A_2^*) + c + v_2(F) + zc > v_2(A_2^*) + a-c + zc\\\\
-    v_2(A_1) &= v_2(A_1^*) + v_2(i_j) + zc\\
+    v_2(A_1) &= v_2(A_1^*) + v_2(x) + zc\\
     &=v_2(A_1^*) + a + zc\le v_2(A_2^*) + a + zc
 \end{align*}
-So also in this case we have an EFX allocation.
+So also in case \ref{enumerate:non-problematic-assigment-case-aca} we have an EFX allocation.
 \gb{Again here I am not sure what case we examine, it would be nicer to break the proof into cases where each case has its own proof. After that we can see if the cases can be unified.} 
-In the first case by considering the constraint defined in equation \ref{eq:constraint-value-freeze-a-b-c} we have that $a-b\ge v_2(F)\ge a-b-c$. After that $p_1$ is unfrozen, we can have that there are still items valued as $b$ from $p_2$. In this case so we have that the items obtained after that $p_1$ is unfrozen have to be divided in $z_b$ and $z_c$ respectively as the items with value $b$ and $c$ for $p_2$. So by defining $z_{m,n}$ as the number of items obtained by $p_n$ 
-\gb{$n$ here is the index of the player? If so use a different letter, usually $n$ denotes the number of the players. The same goes for $m$, this is usually the number of the items and their value} with value $m$ for player $p_2$ we can write the following considering that the non frozen players have the precedence at the last iteration
+\paragraph{Case 1a}
+In case \ref{enumerate:non-problematic-assigment-case-aba} by considering the constraint defined in equation \ref{eq:constraint-value-freeze-a-b-c} we have that $a-b\ge v_2(F)\ge a-b-c$. After that $p_1$ is unfrozen, we can have that there are still items valued as $b$ from $p_2$. In this case so we have that the items obtained after that $p_1$ is unfrozen have to be divided in $z_{b, 1}$, $z_{c, 1}$, $z_{b, 2}$ and  $z_{c, 2}$ respectively as the items with value $b$ and $c$ for $p_2$ obtained by player $p_1$ and $p_2$.
+\gb{$n$ here is the index of the player? If so use a different letter, usually $n$ denotes the number of the players. The same goes for $m$, this is usually the number of the items and not their value} So we can write the following considering that the non frozen players have the precedence at the last iteration
 \begin{align*}
 z_{b,1} = \begin{cases} 
 z_{b,2} &\implies z_{c,1} = \begin{cases} 
@@ -160,14 +167,14 @@ z_{c,2} +1
 \end{cases}   
 \end{cases}
 \end{align*}
-The worst case to consider is when $z_{b,1} = z_{b,2} = z_b$ and $z_{c,1} = z_{c,2} = z_c$. In this case we obtain that
+The worst case to consider is when $z_{b,1} = z_{b,2} = z_b$ and $z_{c,1} = z_{c,2} = z_c$. In this case we have that $A_1$ is formed by $A_1^*$, item $x$ obtained in the iteration that causes $p_1$ to be frozen, $z_b$ and $z_c$ as the items obtained after that he has been unfrozen with value $b$ and $c$ for $p_2$. Instead $A_2$ is formed by $A_2^*$, item $y$ obtained in the iteration that causes $p_1$ to be frozen, $F$ the set of items obtained while $p_1$ was frozen and $z_b$ and $z_c$ as the items obtained after that he has been unfrozen respectively with value $b$ and $c$ for $p_2$. So we can write that 
 \begin{align*}
-    v_2(A_2) &= v_2(A_2^*) + v_2(i_p) + v_2(F) + z_b b + z_cc\\
+    v_2(A_2) &= v_2(A_2^*) + v_2(y) + v_2(F) + z_b b + z_cc\\
     &= v_2(A_2^*) + b + v_2(F) + z_bb +  z_cc > v_2(A_2^*) + a-c + z_b b + z_cc\\\\
-    v_2(A_1) &= v_2(A_1^*) + v_2(i_j) + z_bb + z_cc \\
+    v_2(A_1) &= v_2(A_1^*) + v_2(x) + z_bb + z_cc \\
     &=v_2(A_1^*) + a + z_bb + z_cc\le v_2(A_2^*) + a + z_bb + z_cc
 \end{align*}
-So also this case is EFX. 
+So also in case \ref{enumerate:non-problematic-assigment-case-aba} the algorithm produces EFX allocations.
 \gb{I believe that these cases can be unified as the arguments are kind of similar, the only difference is on whether there are just items with values $c$, or items with value $b$ and $c$. Although I think that I get the general idea, most of the proof should be rewritten in a way so that it is clear which case is examined each time. The notation should be also changed as in many places is a bit confusing.}
 
 \paragraph{}
@@ -182,7 +189,8 @@ The possible problematic assignments are shown in Table \ref{table:problematic-a
             $p_1$ & $a$ & $b$ \\ \hline
             $p_2$ & $b$ & $c$ \\ \hline
         \end{tabular}
-\centering
+        \;\;\;\;\;\;\;\;\;\;\;\;
+        \centering
         \begin{tabular}{|l|l|l|}
             \hline
             $p_1$ & $a$ & $b$ \\ \hline
@@ -192,89 +200,103 @@ The possible problematic assignments are shown in Table \ref{table:problematic-a
         \caption{Problematic Assignments}
         \label{table:problematic-assignments-2-players}
     \end{table}
-\subsubsection{First Problematic Block}
+    
+\subsection{First Problematic Assignment}
+\begin{table}[]
+    \centering
+    \begin{tabular}{|l|l|l||l|}
+    \hline
+    $p_1$ & \textbf{a} & $b$ & $b$        \\ \hline
+    $p_2$ & $b$        & $c$ & \textbf{b} \\ \hline
+    \end{tabular}
+    \label{table:first-problem-association-show-no-double-freeze-first}
+    \caption{Assignment that shows that with the first problematic assignment we cannot have two frozen players or one player frozen twice}
+\end{table}
+
 \gb{Aris also commented on this last time, the numbering  in the equations should be removed. Keep only the numbering the is useful as the proof goes on.}
+Let's start by showing that like in the precedent cases without problematic assignment, we have that only one player per run can be frozen. As first thing we can notice that in order to have a second freeze we must have that there is the assignment shown in Table \ref{table:bbcc-block}, so we need to have an item valued by both players $b$ after that a player has been frozen; but if this happens, than we had not followed the maximum matching in the first execution of the algorithm since we could have assigned the items as shown in Table \ref{table:first-problem-association-show-no-double-freeze-first} in bold. Indeed we have that $a+b > b + b$ and $a+b > a+c$.
+
 Let's consider the first problematic assignment and that $a + c \ge b + b$: in this case by running the algorithm we obtain the following valuations for the two players
-\begin{align}
+\begin{align*}
     v_1(A_1) &= v_1(A_1^*) + a + w_b b + w_c c\\
-    v_2(A_1) &= v_2(A_2^*) + c + v_2(F_1)+ w_b c + w_c c\\
-\end{align}
-where $A_i^*$ is the set of items obtained in the iterations before the problematic assignment by $p_i$, $w_b$ and $w_c$ are respectively the number of items with value $b$ and $c$ obtained by $p_1$ after that he has been unfrozen and $F_1$ is the set of items obtained by $p_2$ while $p_1$ was frozen. In order to have an EFX allocation we must have that 
+    v_2(A_1) &= v_2(A_2^*) + c + v_2(F_1)+ w_b c + w_c c
+\end{align*}
+where $A_i^*$ is the set of items obtained in the iterations before the problematic assignment by $p_i$, $w_b$ and $w_c$ are respectively the number of items with value $b$ and $c$ obtained by $p_1$ after that he has been unfrozen and $F_1$ is the set of items obtained by $p_2$ while $p_1$ was frozen. If we consider that after that the frozen player is unfrozen, both player get the same number of items in order to have an EFX allocation we must respect the following two constraints since we assume that in the last iteration the non frozen player has the precedence. 
 \gb{why in the first equation you use the envy free definition?}
 \begin{align}
     v_1(A_1) &\ge v_1(A_2)\label{eq:condition-1-a1>a2-ch1-first-block-ac-assignment}\\
     v_2(A_2) &\ge v_2(A_1) - c\label{eq:condition-1-a2>a1-c-ch1-first-block-ac-assignment}
 \end{align}
+In this case we have that the set of items $A_1$ will contain $A_1^*$, the item $x$ such that $v_1(x) = a$ and $v_2(x) = b$ that has been obtained by $p_1$ in the iteration that causes $p_1$ to be frozen, $w_b$ and $w_c$ items obtained by $p_1$ after that has been unfrozen that have value $b$ and $c$ respectively for $p_1$. Instead $A_2$ will contain $A_2^*$, the item $y$ such that $v_1(y) = b$ and $v_2(y) = c$ that has been obtained by $p_2$ in the iteration that causes $p_1$ to be frozen, $w_b$ and $w_c$ items obtained by $p_1$ after that has been unfrozen that have value $b$ and $c$ respectively for $p_1$.
 In order to respect the condition in \ref{eq:condition-1-a1>a2-ch1-first-block-ac-assignment} we must have that:
-\begin{align}
+\begin{align*}
     v_1(A_1) &\ge v_1(A_2)\\
-    v_1(A_1^*) + a + w_b b + w_c c &\ge  v_1(A_2^*) + b + v_1(F_1)+ w_b b + w_c c \\
+    v_1(A_1^*) + v_1(x) + w_b b + w_c c &\ge  v_1(A_2^*) + v_1(y) + v_1(F_1)+ w_b b + w_c c \\
     a  &\ge  b + v_1(F_1)
-\end{align}
+\end{align*}
 \gb{The right part of the second inequality has to be explained}
-where we are considering the worst case for which $v_1(A_1^*) = v_1(A_2^*)$.
+where we are considering $v_1(A_1^*) = v_1(A_2^*)$ cause this is the worst possible case since we always have that $v_1(A_1^*) \ge v_1(A_2^*)$ since these set of items are referred to the iterations before that a player has been frozen, so at each of these iterations we have that the item obtained by player $1$ has a larger or equal value to the item obtained by player $2$ for player $1$ (the same holds for $p_2$).
 \gb{Why is this the worst case?}
 Instead in order to have that the condition in equation \ref{eq:condition-1-a2>a1-c-ch1-first-block-ac-assignment} we must have that
 \gb{Explain the right part of the second inequality here as well}
-\begin{align}
+\begin{align*}
     v_2(A_2) &\ge v_2(A_1) -c\\
     v_2(A_2^*) + c + v_2(F_1)+ w_b c + w_c c &\ge v_2(A_1^*) + b + w_b c + w_c c - c\\
     c  + v_2(F_1)&\ge  b - c 
-\end{align}
-that is always true since $ c  + v_2(F_1) = \lfloor \frac{b}{c}\rfloor c > b-c$. So the only possible problem is the first condition: $a \ge  b + v_1(F_1)$. Since in $F_1$ there are the items taken by $p_2$ while $p_1$ is frozen, there can be items valued $b$ by $p_1$; let's consider that we first assign to $p_2$ in $F$ the items valued $b$ by $p_1$ that have not yet assigned before the problematic assignment. In this case we can write
-\begin{align}
+\end{align*}
+where we can notice that the items relative to the counters $w_b$ and $w_c$ have value $c$ for $p_2$ since he after the freeze can only take items with that value.
+This condition is always true since $ c  + v_2(F_1) =\left \lfloor \frac{b}{c}\right\rfloor c > b-c$. So the only possible problem is the first condition: $a \ge  b + v_1(F_1)$. Since in $F_1$ there are the items taken by $p_2$ while $p_1$ is frozen, there can be items valued $b$ by $p_1$; let's consider that we first assign to $p_2$ in $F$ the items valued $b$ by $p_1$ that have not yet assigned before the problematic assignment. In this case we can write
+\begin{align*}
     v_1(F_1) = kb + \lfloor \frac{b-c-kc}{c}\rfloor c = kb + (\lfloor \frac{b}{c}\rfloor -1-k)c
-\end{align}
+\end{align*}
 where $k$ is the number of items valued $b$ by $p_1$ that are in $F_1$ and $\lfloor \frac{b-c-kc}{c}\rfloor$ are the remaining items valued $c$ by $p_1$ that $p_2$ needs to reach $v_2(F_1)  = \lfloor \frac{b-c}{b}\rfloor c$. So we can write the condition in equation \ref{eq:condition-1-a1>a2-ch1-first-block-ac-assignment} as $a \ge b +kb + (\lfloor \frac{b}{c}\rfloor -1-k)c $, that is equivalent to 
-\begin{equation}
+\begin{align}
     k \le \frac{a + c - b - \lfloor \frac{b}{c}\rfloor c }{b-c}
     \label{eq:condition-1-a1>a2-ch1-first-block-ac-assignment-on-k}
-\end{equation}
-
-If we change the problematic assignment we have that we will freeze $p_2$ rather than $p_1$ and that the valuation for the two players will be 
-\gb{Mention here that this violates the maximum matching rule. In addition, in the next inequalities, $w_b$ and $w_c$ mean the same thing as before?}
-\begin{align}
-    v_1(A_1) &= v_1(A_1^*) + b + v_1(F_2) + w_b b + w_c c\\
-    v_2(A_1) &= v_2(A_2^*) + b + w_b c + w_c c\\
 \end{align}
-The conditions in order to have an EFX allocation are the following: 
+
+If we change the problematic assignment we have that we will break the maximum matching rule and we will freeze $p_2$ rather than $p_1$. In this case we are considering $w_b$ and $w_c$ as the number of items with value $b$ and $c$ for $p_1$ respectively that $p_1$ take after that $p_2$ has been unfrozen, so we have that the valuation for the two players will be 
+\gb{Mention here that this violates the maximum matching rule. In addition, in the next inequalities, $w_b$ and $w_c$ mean the same thing as before?}
+\begin{align*}
+    v_1(A_1) &= v_1(A_1^*) + b + v_1(F_2) + w_b b + w_c c\\
+    v_2(A_1) &= v_2(A_2^*) + b + w_b c + w_c c
+\end{align*}
+The conditions in order to have an EFX allocation now become the following ones, since in this case $p_1$ will have the precedence in the last iteration: 
 \begin{align}
     v_1(A_1) &\ge v_1(A_2) - c\label{eq:condition-1-a1>a2-ch1-first-block-bb-assignment}\\
     v_2(A_2) &\ge v_2(A_1)\label{eq:condition-1-a2>a1-c-ch1-first-block-bb-assignment}
 \end{align}
-The first condition is equivalent to 
+In this case we have that $A_1$ will contain $A_1^*$, the item $y$ obtained in the iteration in which we freeze $p_2$ such that $v_1(y) =  b$ and $v_2(y) = c$, $F_2$ as the set of items obtained by $p_1$ while $p_2$ is frozen and $w_b$ and $w_c$ items obtained by $p_1$ after that $p_2$ has been unfrozen that have value $b$ and $c$ respectively for $p_1$. Instead $A_2$ will contain $A_2^*$, the item $x$ obtained in the iteration in which we freeze $p_2$ such that $v_1(x) =  a$ and $v_2(x) = b$ and $w_b$ and $w_c$ items obtained by $p_2$ after that has been unfrozen that have value $b$ and $c$ respectively for $p_1$. So the first condition is equivalent to 
 \begin{align*}
     v_1(A_1) &\ge v_1(A_2) -c\\
-    v_1(A_1^*) + b + v_1(F_2)+ w_b b + w_c c &\ge v_2(A_1^*) + a + w_b b + w_c b - c\\
+    v_1(A_1^*) + v_1(y) + v_1(F_2)+ w_b b + w_c c &\ge v_2(A_1^*) + v_1(x) + w_b b + w_c b - c\\
     b  + v_1(F_2)&\ge  a - c 
 \end{align*}
 That is always true since $ v_1(F_2) \ge  a-b-c$ as defined in equation \ref{eq:constraint-value-freeze-a-b-c}. So now we have to check the condition for which $p_2$ is EFX towards $p_1$.
-\begin{align}
+\begin{align*}
     v_2(A_2) &\ge v_2(A_1)\\
-    v_2(A_2^*) + b + w_b c + w_c c &\ge  v_2(A_1^*) + c + v_2(F_2)+ w_b c + w_c c\\
+    v_2(A_2^*) + v_2(x) + w_b c + w_c c &\ge  v_2(A_1^*) + v_2(y) + v_2(F_2)+ w_b c + w_c c\\
     b  &\ge  c + v_2(F_2)
-\end{align}
+\end{align*}
 We can notice that $v_2(F_2) = kc + \lfloor \frac{a-b-kb}{c} \rfloor c$ since, as said before, $k$ is the minimum number of items that are surely present with value $b$ for $p_1$ after the problematic assignment, so the other values that are used to reach the constraint $v_1(F_2) \ge a-b-c$ are in the worst case items with value $c$ for $p_1$. We can also notice that all these items have value $c$ for $p_2$ since he already took an item with value $c$, so there are no other items with value $b$ or $a$. So we have that the condition in equation \ref{eq:condition-1-a2>a1-c-ch1-first-block-bb-assignment} becomes
-\begin{align}
+\begin{align*}
     v_2(A_2) &\ge v_2(A_1)\\
      b  &\ge  c + v_2(F_2)\\
       b  &\ge  c +  kc + \lfloor \frac{a-b-kb}{c} \rfloor c\\
       b  &\ge  c +  kc + a-b-kb\\
       \frac{a + c -2b}{b-c}  &\le   k
-\end{align}
+\end{align*}
 So the second condition in order to have an EFX allocation by changing the problematic assignment is 
 \begin{equation}
     k \ge \frac{a + c -2b}{b-c}
     \label{eq:condition-1-a2>a1-ch1-first-block-bb-assignment-on-k}
 \end{equation}
 As we can see, equation \ref{eq:condition-1-a1>a2-ch1-first-block-ac-assignment-on-k} and \ref{eq:condition-1-a2>a1-ch1-first-block-bb-assignment-on-k} are complementary on integer values of $k$. So if the algorithm produces a non EFX allocation, by changing the assignment we surely obtain an EFX allocation in the first problematic assignment of table \ref{table:problematic-assignments-2-players}. 
-\gb{One question that I have is the following: In the original paper there the argument that each player can freeze at most once. Is this the case here as well after the proposed modification? If this is not the case, then the arguments about the value that each agent derives after she is unfrozen still hold? For example, is it possible that we start with a problematic block, and the frozen player becomes active again, she can be frozen again? Is this possible? If yes does the proof considers such a case? If no, then shouldn't we prove it?}
+\gb{One question that I have is the following: In the original paper there is the argument that each player can freeze at most once. Is this the case here as well after the proposed modification? If this is not the case, then the arguments about the value that each agent derives after she is unfrozen still hold? For example, is it possible that we start with a problematic block, and when the frozen player becomes active, she can be frozen again? Is this possible? If yes does the proof considers such a case? If no, then shouldn't we prove it?}
 
-
-
-\subsubsection{Second Problematic Block}
+\subsection{Second Problematic Assignment}
 In order to show that also in this case we obtain an EFX allocation, I will first consider the case of identical valuation functions. We can easily note that with this type of block we could have two freezes: one caused by this problematic block and one caused than by the block shown in Table \ref{table:bbcc-block}.
-\gb{I suppose that my above concern is answered here? Although I suppose that in the beginning of the draft a small discussion should be added that described why every player can freeze only once, except the case that we examine here.}
+\gb{I suppose that my above concern is answered here? If this the case, I suppose that in the beginning of the draft a small discussion should be added that describes why every player can freeze only once, except the case that we examine here.}
 \begin{table}[h]
         \centering
         \begin{tabular}{|l|l|l|}
