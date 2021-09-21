@@ -247,7 +247,7 @@ Instead in order to have that the condition in equation \ref{eq:condition-1-a2>a
 where we can notice that the items relative to the counters $w_b$ and $w_c$ have value $c$ for $p_2$ since he after the freeze can only take items with that value.
 This condition is always true since $ c  + v_2(F_1) =\left \lfloor \frac{b}{c}\right\rfloor c > b-c$. So the only possible problem is the first condition: $a \ge  b + v_1(F_1)$. Since in $F_1$ there are the items taken by $p_2$ while $p_1$ is frozen, there can be items valued $b$ by $p_1$; let's consider that we first assign to $p_2$ in $F$ the items valued $b$ by $p_1$ that have not yet assigned before the problematic assignment. In this case we can write
 \begin{align*}
-    v_1(F_1) = kb + \lfloor \frac{b-c-kc}{c}\rfloor c = kb + (\lfloor \frac{b}{c}\rfloor -1-k)c
+    v_1(F_1) = kb + \left\lfloor \frac{b-c-kc}{c}\right\rfloor c = kb + (\left\lfloor \frac{b}{c}\right\rfloor -1-k)c
 \end{align*}
 where $k$ is the number of items valued $b$ by $p_1$ that are in $F_1$ and $\lfloor \frac{b-c-kc}{c}\rfloor$ are the remaining items valued $c$ by $p_1$ that $p_2$ needs to reach $v_2(F_1)  = \lfloor \frac{b-c}{b}\rfloor c$. So we can write the condition in equation \ref{eq:condition-1-a1>a2-ch1-first-block-ac-assignment} as $a \ge b +kb + (\lfloor \frac{b}{c}\rfloor -1-k)c $, that is equivalent to 
 \begin{align}
@@ -282,7 +282,7 @@ We can notice that $v_2(F_2) = kc + \lfloor \frac{a-b-kb}{c} \rfloor c$ since, a
 \begin{align*}
     v_2(A_2) &\ge v_2(A_1)\\
      b  &\ge  c + v_2(F_2)\\
-      b  &\ge  c +  kc + \lfloor \frac{a-b-kb}{c} \rfloor c\\
+      b  &\ge  c +  kc + \left\lfloor \frac{a-b-kb}{c} \right\rfloor c\\
       b  &\ge  c +  kc + a-b-kb\\
       \frac{a + c -2b}{b-c}  &\le   k
 \end{align*}
@@ -317,18 +317,18 @@ In this part I am going to use $F_{i,j}$ in order to describe the set of items o
 where $\%$ is the modulus operation.
 \paragraph{Identical Valuation Functions}
 When we have identical valuation functions and we have that we freeze first $p_1$ and than $p_2$ we can consider the valuations of each player set as 
-\begin{align}
+\begin{align*}
     v(A_1) & = a + c + v(F_{2,c})\\
     v(A_2) & = b + v(F_{1,b}) + b
-\end{align}
+\end{align*}
 Since in $A_1$ we have the item valued as $a$ that leads to freeze $p_1$, $c$ is the value of the item obtained when $p_2$ is frozen and $F_{2,c}$ is the set of items obtained when $p_2$ is frozen since $p_1$ took the item with value $c$. Instead in $A_2$ we have the item with value $b$ obtained when $p_1$ is frozen, $F_{1,b}$ that is the set of items obtained by $p_2$ while $p_1$ is frozen since $p_2$ took the item with value $b$ and $b$ that is the value obtained by $p_2$ before being frozen.
 We can write that 
 \begin{align}
-    v(F_{2,c}) + c &= \lfloor \frac{b}{c}\rfloor c = b - (b\% c) = b-l \label{v(F2c)+c-identical-valuation-functions-second-block}\\
-    v(F_{1,b}) + b &= \lfloor \frac{a}{b}\rfloor b = a - (a\% b) = a - k  &\textit{ if } \:k = a\% b < c \label{v(F1b)+b-amodb<c-identical-valuation-functions-second-block}\\
-    v(F_{1,b}) + b &=\lfloor \frac{a}{b}\rfloor b + \lfloor \frac{a - \lfloor \frac{a}{b}\rfloor b }{c} \rfloor c \label{v(F1b)+b-amodb>c-identical-valuation-functions-second-block} \\&= a-k + \lfloor \frac{a- a + k }{c} \rfloor c = a - k + \lfloor \frac{k}{c} \rfloor c \\&= a - k + k - k\% c  = a - w &\textit{ if } \:k = a\% b \ge c
+    v(F_{2,c}) + c &= \left\lfloor \frac{b}{c}\right\rfloor c = b - (b\% c) = b-l \label{v(F2c)+c-identical-valuation-functions-second-block}\\
+    v(F_{1,b}) + b &= \left\lfloor \frac{a}{b}\right\rfloor b = a - (a\% b) = a - k  &\textit{ if } \:k = a\% b < c \label{v(F1b)+b-amodb<c-identical-valuation-functions-second-block}\\
+    v(F_{1,b}) + b &=\left\lfloor \frac{a}{b}\right\rfloor b + \left\lfloor \frac{a - \left\lfloor \frac{a}{b}\right\rfloor b }{c}\right \rfloor c \label{v(F1b)+b-amodb>c-identical-valuation-functions-second-block} \\&= a-k + \left\lfloor \frac{a- a + k }{c} \right\rfloor c = a - k + \left\lfloor \frac{k}{c}\right\rfloor c \\&= a - k + k - k\% c  = a - w &\textit{ if } \:k = a\% b \ge c
 \end{align}
-where in equation \ref{v(F1b)+b-amodb<c-identical-valuation-functions-second-block} we are considering that, since $a\% b < c$ than by taking $\lfloor\frac{a}{b}\rfloor$ items with value $b$ we reach the bound $a-b-c$, while in equation \ref{v(F1b)+b-amodb<c-identical-valuation-functions-second-block} we need to take some items with value $c$ in order to reach it. We can also notice that since we are considering that there is a second freeze, there is a number of items with value $b$ greater or equal to $\lfloor\frac{a}{b}\rfloor$. 
+where in equation \ref{v(F1b)+b-amodb<c-identical-valuation-functions-second-block} we are considering that, since $a\% b < c$ than by taking $\left\lfloor\frac{a}{b}\right\rfloor$ items with value $b$ we reach the bound $a-b-c$, while in equation \ref{v(F1b)+b-amodb<c-identical-valuation-functions-second-block} we need to take some items with value $c$ in order to reach it. We can also notice that since we are considering that there is a second freeze, there is a number of items with value $b$ greater or equal to $\left\lfloor\frac{a}{b}\right\rfloor$. 
 \begin{itemize}
     \item if $k < c$ we have that
     \begin{align*}
@@ -395,12 +395,12 @@ Let's consider the case in which we freeze first $p_1$, than $p_2$ will take $F_
 \end{enumerate}
 The same happens when we have that we freeze $p_2$ and than $p_1$. Let's consider that in both cases we use the same number of items of type $1$: $x$, that of type $2$ we have $v$ items and of type $3$ we have $s$ items. 
 When freezing $p_1$ we can write that 
-\begin{align}
-    v_1(F_{1,b}) &= yb + vc + \lfloor \frac{a-b-yb-vb}{c}\rfloor b \\
+\begin{align*}
+    v_1(F_{1,b}) &= yb + vc + \left\lfloor \frac{a-b-yb-vb}{c}\right\rfloor b \\
                 & = yb + vc + s_e b\\
-    v_2(F_{1,b}) &= yb + vb + \lfloor \frac{a-b-yb-vb}{c}\rfloor c \\
+    v_2(F_{1,b}) &= yb + vb + \left\lfloor \frac{a-b-yb-vb}{c}\right\rfloor c \\
                 & = yb + vb + s_e c \le a-b
-\end{align}
+\end{align*}
 where $s_e\le s$ is the number of items of type $3$ that $p_2$ needs to achieve the constraint $v_2(F_{1,b})\ge a-b-c$. In this case in order to have $v_1(F_{1,b}) \le v_2(F_{1,b})$ we must have that
 \begin{align*}
     v_1(F_{1,b}) &\le v_2(F_{1,b})\\
@@ -409,12 +409,12 @@ where $s_e\le s$ is the number of items of type $3$ that $p_2$ needs to achieve 
 \end{align*}
 that is surely true when $s\le v$ since $b> c$.\\
 Instead if we freeze $p_2$ we have that
-\begin{align}
-    v_1(F_{2,b}) &= yb + sb + \lfloor \frac{a-b-yb-sb}{c}\rfloor c \\
+\begin{align*}
+    v_1(F_{2,b}) &= yb + sb + \left\lfloor \frac{a-b-yb-sb}{c}\right\rfloor c \\
                 & = yb + sb + v_e c\\
-    v_2(F_{2,b}) &= yb + sc + \lfloor \frac{a-b-yb-sb}{c}\rfloor b \\
+    v_2(F_{2,b}) &= yb + sc + \left\lfloor \frac{a-b-yb-sb}{c}\right\rfloor b \\
                 & = yb + sc + v_e b \le a-b
-\end{align}
+\end{align*}
 where $v_e\le v$ is the number of items of type $2$ that $p_1$ needs to achieve the constraint $v_1(F_{2,b})\ge a-b-c$. In this case in order to have $v_2(F_{2,b}) \le v_1(F_{2,b})$ we must have that
 \begin{align*}
     v_2(F_{2,b}) &\le v_1(F_{2,b})\\
