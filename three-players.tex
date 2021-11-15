@@ -119,7 +119,7 @@ In order to see that the algorithm works we have to deal with different cases:
     \label{table:three-players-two-two-values-one-three-second-problematic-invert-assignment-second-problematic}
 \end{table}
 
-\section{New approach to three players}
+\section{Three Players}
 \subsection{Redefinition of problematic assignment}
 For two players we have that only when the frozen player values remaining items as $b$, we could have a non EFX allocation by following the maximum matching assignments because in the end the frozen player could envy the non frozen player. In order to see what happens with three players we have to consider the different cases in which the frozen player values all the remaining items as $c$, let's consider that during the assignments that leads to freeze player $p_1$ he took item $x$, $p_2$ took item $y$ and $p_3$ took item $z$: 
 \begin{itemize}
@@ -223,7 +223,7 @@ In the table \ref{table-3-players-aab} the letters above each column are used in
  \end{itemize}
   We can notice that for how we give the items to the two non frozen players, we will never have that one player envies the other, so we will never have to freeze a player in this phase. Instead after that the frozen player $p_i$ is unfrozen, we could have another assignment that can lead to a freeze: in this case we can see that $p_3$ is not a cause of this freeze since all the remaining items have value $c$, so we will freeze one player among $p_1$ and $p_2$. If this happens, than we have to freeze the player that has not yet been frozen. Let's consider that in the first freeze we froze $p_1$, than when $p_1$ is unfrozen he is envy-free to the other two players, while for $p_2$ we have that $v_2(A_2) \ge v_2(A_1) - c$, so by freezing $p_2$ we ensure the fact that $p_1$ takes value lower than $p_2$ with a difference of at most a $c$, while $p_2$ takes items with larger or equal value to the ones obtained by $p_1$, so we are ensuring the fact that $p_1$ and $p_2$ are EFX.
 
-\subsection{Other problematic assignment}
+\subsection{Second problematic assignment}
 \begin{table}[h]
 \centering
 \begin{tabular}{|l|l|l|l||l|l|}
@@ -247,97 +247,8 @@ In this case is easy to see that $p_2$ and $p_3$ both need $\floor{b-c}{c}$ item
     \end{itemize}
 \end{itemize}
 
-\subsection{Problematic assignment with a player with constant valuation function}
 
-\begin{table}[!htb]
-    \begin{minipage}{.5\linewidth}
-      \centering
-        \begin{tabular}{|l|l|l|l|}
-            \hline
-                  & $i_1$ & $i_2$ & $i_3$ \\ \hline
-            $p_1$ & a     & b     & b     \\ \hline
-            $p_2$ & b     & c     & c     \\ \hline
-            $p_3$ & c     & c     & c     \\ \hline
-            
-        \end{tabular}
-        \caption{}
-        \label{table:3-players-abb-bcc-ccc}
-    \end{minipage}%
-    \begin{minipage}{.5\linewidth}
-      \centering
-        \begin{tabular}{|l|l|l|l|}
-            \hline
-                  & $i_1$ & $i_2$ & $i_3$ \\ \hline
-            $p_1$ & a     & b     & b     \\ \hline
-            $p_2$ & a     & b     & b     \\ \hline
-            $p_3$ & c     & c     & c     \\ \hline
-        \end{tabular}
-        \caption{}
-    \end{minipage} 
-\end{table}
-\begin{table}[!htb]
-    \begin{minipage}{.5\linewidth}
-      \centering
-        \begin{tabular}{|l|l|l|l|}
-            \hline
-                  & $i_1$ & $i_2$ & $i_3$ \\ \hline
-            $p_1$ & a     & b     & b     \\ \hline
-            $p_2$ & b     & c     & c     \\ \hline
-            $p_3$ & b     & b     & b     \\ \hline
-            
-        \end{tabular}
-        \caption{}
-        \label{table:3-players-abb-bcc-bbb-const}
-    \end{minipage}%
-    \begin{minipage}{.5\linewidth}
-      \centering
-        \begin{tabular}{|l|l|l|l|}
-            \hline
-                  & $i_1$ & $i_2$ & $i_3$ \\ \hline
-            $p_1$ & a     & b     & b     \\ \hline
-            $p_2$ & a     & b     & b     \\ \hline
-            $p_3$ & b     & b     & b     \\ \hline
-        \end{tabular}
-        \caption{}
-        \label{table:3-players-abb-abb-bbb-const}
-    \end{minipage} 
-\end{table}
-
-In these cases, since the third player has no preference over the items while one of the two other players is frozen, is enough to assign him the same items that we assign to the other non frozen player. Let's consider that we freeze $p_1$, than $p_2$ obtains a set of items $F_2$, by assigning to $p_3$ the same type of items, we have that $v_1(F_2) = v_1(F_3)$ so if $p_1$ does not envy $p_2$, than he does also not envy $p_3$. Moreover $p_2$ will not envy $p_1$ since they took the same items.
-
-In case of odd number of items of a type, we should assign to $p_2$ the item with higher value for $p_1$, in order to have that $v_1(F_2) \ge v_1(F_3)$.
-
-\begin{table}[!htb]
-    \begin{minipage}{.5\linewidth}
-      \centering
-        \begin{tabular}{|l|l|l|l|}
-        \hline
-              & $i_1$ & $i_2$ & $i_3$ \\ \hline
-        $p_1$ & a     & a     & a     \\ \hline
-        $p_2$ & a     & b     & b     \\ \hline
-        $p_3$ & a     & b     & b     \\ \hline
-        \end{tabular}
-        \caption{}
-        \label{table:3-players-aaa-abb-abb}
-    \end{minipage}%
-    \begin{minipage}{.5\linewidth}
-      \centering
-        \begin{tabular}{|l|l|l|l|}
-        \hline
-              & $i_1$ & $i_2$ & $i_3$ \\ \hline
-        $p_1$ & a     & a     & a     \\ \hline
-        $p_2$ & a     & b     & b     \\ \hline
-        $p_3$ & b     & c     & c     \\ \hline
-        \end{tabular}
-        \caption{}
-        \label{table:3-players-aaa-abb-bcc}
-    \end{minipage}%
-
-\end{table}
-
-We can notice that in the case of table \ref{table:3-players-abb-bcc-ccc} we can have before this assignment another one in which we freeze one player among $p_2$ and $p_3$ as shown in table \ref{table:3-players-aaa-abb-abb} and \ref{table:3-players-aaa-abb-bcc}. Let's assume that we freeze $p_2$, than $p_i$ will obtain a set $\hat A_i$ of items before the assignment in table \ref{table:3-players-abb-bcc-ccc} such that $v_3(\hat A_3) \ge v_3(\hat A_2) - c$. So in this case $p_3$ has the precedence in the last assignment.
-
-\subsection{Other problematic assignment}
+\subsection{Third problematic assignment}
 
 \begin{table}[h]
 \centering
@@ -446,7 +357,7 @@ where the $-c$ in the last two rows is the first one because of in the case of s
 
 In this case we can notice that $p_1$ and $p_2$ are EF towards the other two players and also that this case only happens when the two non frozen player start to take items of type $z$, so we can assert that the only two types of items that will be as last item are $w$ and $z$. In the case of last item of type $w$ is enough to assign it with precedence to $p_3$, instead in case of last item of type $z$, if there are two of such items, we can assign one to $p_1$ and one to $p_3$. Instead in the case of only one last item of type $z$ we have to deal with the fact that $p_3$ needs to take the last item and also that that item values $b$ for $p_1$. In the case in which in $F_2$ there is an item valued $c$ by $p_1$, we exchange that item with the last item and than we give it to $p_3$. Now I'll show that the bundle obtained while $p_1$ was frozen by the player who exchanged it with him has at least one item that $p_1$ values $c$: let's start considering $F_2$, than if by absurd we consider that $rem_k = 0$ than we must have that $x + y \ge v + l + k$, but than also $y = 0$, so we would have that $x \ge v + l + k$ and this violates the first assumption that for which $k + y \ge z + l$ and so $k \ge z + l$ and also $k + v \ge x + z$, but before we wrote that $x \ge v + l + k$. Instead in the case of $F_3$ we have that to have no item valued $c$, we must have that $k = 0, v = 0$ and this violates the initial assumption for which $k + v \ge x + z$.
 
-\subsection{Last Problematic Assignment}
+\subsection{Fourth Problematic Assignment}
 \begin{table}[h]
 \centering
 \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|}
@@ -565,5 +476,163 @@ In the case in which we have that $l$ is even or $l$ is odd and we have that one
     \caption{}
     \label{table:abb-bcc-bbb-first-assignment}
 \end{table}
+
+\subsection{Problematic assignment with a player with constant valuation function}
+
+\begin{table}[!h]
+    \begin{minipage}{.5\linewidth}
+      \centering
+        \begin{tabular}{|l|l|l|l|}
+            \hline
+                  & $i_1$ & $i_2$ & $i_3$ \\ \hline
+            $p_1$ & a     & b     & b     \\ \hline
+            $p_2$ & b     & c     & c     \\ \hline
+            $p_3$ & c     & c     & c     \\ \hline
+            
+        \end{tabular}
+        \caption{}
+        \label{table:3-players-abb-bcc-ccc}
+    \end{minipage}%
+    \begin{minipage}{.5\linewidth}
+      \centering
+        \begin{tabular}{|l|l|l|l|}
+            \hline
+                  & $i_1$ & $i_2$ & $i_3$ \\ \hline
+            $p_1$ & a     & b     & b     \\ \hline
+            $p_2$ & a     & b     & b     \\ \hline
+            $p_3$ & c     & c     & c     \\ \hline
+        \end{tabular}
+        \caption{}
+    \end{minipage} 
+\end{table}
+\begin{table}[!htb]
+    \begin{minipage}{.5\linewidth}
+      \centering
+        \begin{tabular}{|l|l|l|l|}
+            \hline
+                  & $i_1$ & $i_2$ & $i_3$ \\ \hline
+            $p_1$ & a     & b     & b     \\ \hline
+            $p_2$ & b     & c     & c     \\ \hline
+            $p_3$ & b     & b     & b     \\ \hline
+            
+        \end{tabular}
+        \caption{}
+        \label{table:3-players-abb-bcc-bbb-const}
+    \end{minipage}%
+    \begin{minipage}{.5\linewidth}
+      \centering
+        \begin{tabular}{|l|l|l|l|}
+            \hline
+                  & $i_1$ & $i_2$ & $i_3$ \\ \hline
+            $p_1$ & a     & b     & b     \\ \hline
+            $p_2$ & a     & b     & b     \\ \hline
+            $p_3$ & b     & b     & b     \\ \hline
+        \end{tabular}
+        \caption{}
+        \label{table:3-players-abb-abb-bbb-const}
+    \end{minipage} 
+\end{table}
+
+In these cases, since the third player has no preference over the items while one of the two other players is frozen, is enough to assign him the same items that we assign to the other non frozen player. Let's consider that we freeze $p_1$, than $p_2$ obtains a set of items $F_2$, by assigning to $p_3$ the same type of items, we have that $v_1(F_2) = v_1(F_3)$ so if $p_1$ does not envy $p_2$, than he does also not envy $p_3$. Moreover $p_2$ will not envy $p_1$ since they took the same items.
+
+In case of odd number of items of a type, we should assign to $p_2$ the item with higher value for $p_1$, in order to have that $v_1(F_2) \ge v_1(F_3)$.
+
+\begin{table}[!htb]
+    \begin{minipage}{.5\linewidth}
+      \centering
+        \begin{tabular}{|l|l|l|l|}
+        \hline
+              & $i_1$ & $i_2$ & $i_3$ \\ \hline
+        $p_1$ & a     & a     & a     \\ \hline
+        $p_2$ & a     & b     & b     \\ \hline
+        $p_3$ & a     & b     & b     \\ \hline
+        \end{tabular}
+        \caption{}
+        \label{table:3-players-aaa-abb-abb}
+    \end{minipage}%
+    \begin{minipage}{.5\linewidth}
+      \centering
+        \begin{tabular}{|l|l|l|l|}
+        \hline
+              & $i_1$ & $i_2$ & $i_3$ \\ \hline
+        $p_1$ & a     & a     & a     \\ \hline
+        $p_2$ & a     & b     & b     \\ \hline
+        $p_3$ & b     & c     & c     \\ \hline
+        \end{tabular}
+        \caption{}
+        \label{table:3-players-aaa-abb-bcc}
+    \end{minipage}%
+
+\end{table}
+
+We can notice that in the case of table \ref{table:3-players-abb-bcc-ccc} we can have before this assignment another one in which we freeze one player among $p_2$ and $p_3$ as shown in table \ref{table:3-players-aaa-abb-abb} and \ref{table:3-players-aaa-abb-bcc}. Let's assume that we freeze $p_2$, than $p_i$ will obtain a set $\hat A_i$ of items before the assignment in table \ref{table:3-players-abb-bcc-ccc} such that $v_3(\hat A_3) \ge v_3(\hat A_2) - c$. So in this case $p_3$ has the precedence in the last assignment.
+
+\subsection{We Cannot Use Maximum Matching}
+In the case of three players we cannot use the maximum matching technique to assign the items while a player is frozen in one of the problematic assignments because we cannot control the value for the frozen player of both the players. In table \ref{table:example-maximum-matching-problem} there is an example that shows an allocation in bold obtained by choosing the items with the maximum matching technique while $p_1$ is frozen. As we can see also if we invert the assignment by freezing $p_2$ we can obtain the same assignment that leads the frozen player to envy $p_3$. In this particular case, by considering $a=400, b=100$ and $c=40$, in the end we have that $v_1(A_1) = a + c = 440$ while $v_1(A_3) - \min_{x \in A_3} v_1(x) = 5b + c -c = 500$. 
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lllllllllllllll}
+                            & $i_1$                           & $i_2$                           & $i_3$                           & $i_4$                           & $i_5$                           & $i_6$                           & $i_7$                           & $i_8$                           & $i_9$                           & $i_{10}$                        & $i_{11}$                        & $i_{12}$                        & $i_{13}$                        & $i_{14}$                        \\ \hline
+\multicolumn{1}{|l|}{$p_1$} & \multicolumn{1}{l|}{\textbf{a}} & \multicolumn{1}{l|}{b}          & \multicolumn{1}{l|}{b}          & \multicolumn{1}{l|}{b}          & \multicolumn{1}{l|}{c}          & \multicolumn{1}{l|}{b}          & \multicolumn{1}{l|}{c}          & \multicolumn{1}{l|}{b}          & \multicolumn{1}{l|}{c}          & \multicolumn{1}{l|}{b}          & \multicolumn{1}{l|}{c}          & \multicolumn{1}{l|}{c}          & \multicolumn{1}{l|}{c}          & \multicolumn{1}{l|}{\textbf{c}} \\ \hline
+\multicolumn{1}{|l|}{$p_2$} & \multicolumn{1}{l|}{a}          & \multicolumn{1}{l|}{\textbf{b}} & \multicolumn{1}{l|}{b}          & \multicolumn{1}{l|}{b}          & \multicolumn{1}{l|}{\textbf{b}} & \multicolumn{1}{l|}{b}          & \multicolumn{1}{l|}{\textbf{b}} & \multicolumn{1}{l|}{c}          & \multicolumn{1}{l|}{\textbf{c}} & \multicolumn{1}{l|}{c}          & \multicolumn{1}{l|}{\textbf{c}} & \multicolumn{1}{l|}{c}          & \multicolumn{1}{l|}{\textbf{c}} & \multicolumn{1}{l|}{c}          \\ \hline
+\multicolumn{1}{|l|}{$p_3$} & \multicolumn{1}{l|}{b}          & \multicolumn{1}{l|}{b}          & \multicolumn{1}{l|}{\textbf{b}} & \multicolumn{1}{l|}{\textbf{b}} & \multicolumn{1}{l|}{b}          & \multicolumn{1}{l|}{\textbf{b}} & \multicolumn{1}{l|}{b}          & \multicolumn{1}{l|}{\textbf{b}} & \multicolumn{1}{l|}{c}          & \multicolumn{1}{l|}{\textbf{b}} & \multicolumn{1}{l|}{c}          & \multicolumn{1}{l|}{\textbf{c}} & \multicolumn{1}{l|}{c}          & \multicolumn{1}{l|}{c}          \\ \hline
+\end{tabular}
+\caption{An assignment that shows the problem of using maximum matching while a player is frozen because of a problematic assignment}
+\label{table:example-maximum-matching-problem}
+\end{table}
+
+\newpage
+\newpage
+\subsection{Problematic assignments where there is a player that does not envy the other}
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+      & d & e & f & g & j & k & y & x & v & l & z & w \\ \hline
+$p_1$ & b & b & c & c & b & c & c & b & c & b & b & c \\ \hline
+$p_2$ & b & c & b & c & b & b & b & b & c & c & c & c \\ \hline
+$p_3$ & a & a & a & a & b & b & c & c & b & b & c & c \\ \hline
+\end{tabular}
+\caption{Types of items after a problematic assignment}
+\end{table}
+In this section I am going to describe the approach used to obtain EFX allocation when we have a problematic assignment in which a player ($p_3$ without loss of generality) does not envy the item obtained by the other two players. In the beginning of the proof I will show the case in which each type of item has an even number of elements, than I will show that in the case in which this not hold, we can obtain the same characteristics with other assignments. 
+\paragraph{Even number of items} Let's consider the case in which we have even number of items for each remaining type after the problematic assignment, in this case we can assign the items to $p_3$ by letting him choose the one with higher value for him and than assign the same type of item to the other non frozen player ($p_2$ without loss of generality). By doing so we have that $v_1(F_2) = v_1(F_3)$, so if when unfrozen $p_1$ envies $p_3$ than he envies also $p_2$. We have two cases now:
+\begin{itemize}
+\item when unfrozen $v_1(F_2) \le a-b$: in this case we have that all players are EF towards each other except for $p_2$ that has $v_2(\bar A_1) \ge v_2(\bar A_2)> v_2(\bar A_1) - c$, where $\bar A_i$ is the set of items obtained by player $i$ from the problematic assignment on.
+\item when unfrozen $v_1(F_2) > a-b$: in this case we have to invert the assignment and give $\bar A_1$ to $p_2$ and $\bar A_2$ to $p_1$ and after this we have that all the players are EF towards each other.
+\end{itemize}
+Now we have to deal with the fact that the player who has $F_2$ ($p_2$ in the first case and $p_1$ in the second case) did not took the items by first taking all the items with value $b$ and than the ones with value $c$ because he took always the same item took by $p_3$, so we could have some problems when assigning the last items. As first thing we can notice that we can avoid to give the last item to $p_3$ because he is EF towards $p_2$, $p_1$  and took the items in the right order, so we have to deal only on the case in which we have a single last item that we have to give to $p_1$ or $p_2$. The main problem raises when the last item is valued by both $p_1$ and $p_2$ as $b$. Now in order to show how to deal with this case I am going to consider the case in which there was no swap after that $p_1$ has been unfrozen, in the other case is enough to exchange $p_1$ with $p_2$. So if we have that $\min_{x\in A_2} v_1(x) = b$ than we can assign the item to $p_2$ and obtain an EFX allocation directly, instead in the case in which $\min_{x\in A_2} v_1(x) = c$ than we have to consider when the item $g$ valued $c$ by $p_1$ has been obtained: if it has been obtained before or after the problematic assignment, than surely $p_1$ took in the same iteration an item valued $b$ or higher, so by assigning the last item to $p_2$ we still have an EFX allocation. In the case in which the item valued $c$ by $p_1$ has been obtained when $p_1$ was frozen, than we have that the last item can be of two types: 
+\begin{itemize}
+    \item $g = (c,b,\star)$: in this case or we have that $\exists f=(b,c,\star)\in F_2$ or $v_1(F_2) \le a-2b + c$. In the latter case we can assign the last item directly to $p_2$ by keeping an EFX allocation, in the first case instead we can assign to $p_1$ $f$, while to $p_2$ we assign $g$. In this manner we decrease the value for $p_1$ and $p_2$ of the other player set of items of $b-c$, so we can assign to $p_2$ the last item. We can also notice that the value of $A_2$ will not increase for $p_3$ since the last item has surely lower or equal value to the item removed. Instead for what concerns $p_1$ for $p_3$, since $p_3$ did not envied him when $p_1$ was frozen, $p_3$ has $v_3(A_2)\le v_3(A_3\setminus F_3)$ and $v_3(F_3)\ge v_3(f)$, so also for $p_3$ this is still an EFX allocation.
+    \item $g = (c,c,\star)$: this last case is the case in which all the items in $A_2$ valued $c$ by $p_1$ value also for him $c$ and have been obtained while $p_1$ was frozen. In this case we give all (or at most $\floor{b}{c}$) such type of items to $p_1$ from $F_2$ and assign the last item to $p_2$. If there are not enough such items we are still assigning them to $p_1$ and than we obtain that $\min_{x \in A_2} v_1(x) = b $, so we can assign the last item to $p_2$. If instead there are such items, we obtain an EFX allocation because the value for $p_1$ of $A_2$ increases at most of $c$. Also in this case for $p_3$ this is not a problem because the items assigned to $p_1$ from $F_2$ have still value lower or equal to $v_3(F_3)$.
+\end{itemize}
+\paragraph{non even number of items} in the precedent paragraph I have shown that by giving the same items to $p_3$ and $p_2$ chosen by $p_3$ we obtain an EFX allocation in the end, the main characteristic of such assignments that lead to an EFX allocation is that $v_1(F_2) \ge v_1(F_3)$ and that $p_2$ and $p_3$ are EF. In this paragraph I am going to show ho to keep such constraints when we have no even number of items and, in the case in which is not possible, how to still obtain an EFX allocation. In the next part I am going to show how to deal with the most difficult cases, for all the ones that have not been discussed here, it means that or we can assign the odd $g$ item to $p_3$ and we have another one $f$ such that $v_2(f)\ge v_2(g)$ and $v_1(f) \le v_1(g)$ or the opposite.
+\begin{itemize}
+    \item $d$ is odd: \begin{itemize}
+        \item $e,f,g,j,x=0$: in this case we can assign to $p_2$ one item between $k$ or $z$ and one between $k$ or $y$, while to $p_3$ we assign the odd $d$ item. In this case I have to highlight that $p_3$ will not envy $p_2$ because is impossible to have $2b\ge a$, indeed in this case we would have that no item is taken while $p_1$ is frozen because $b\ge a-b$.
+        \item $e,f,g,j,x, l, z=0$: in this case we have to make a manual assignments and not follow the algorithm described in this subsection. In this case we have that the only types of items that are left are $d,k,y,w$ and $v$. In this case we can split the $d$ items between $p_2$ and $p_3$ and than assign the odd $d$ item to $p_3$, while one between $k$ or $y$ to $p_2$ (or in the case in which $k=y=0$ we assign $\floor{b}{c}$ items between $w$ and $v$ and in the case in which these item have value higher of $a$ for $p_3$, than invert such last assignment)
+        \item $e,f,g,j,x,k,y=0$: in this case, since $f+k=0$ we have that also $l+e=0$ and so $l=e=0$. So in this case we only have the following items: $d,z,w$ and $v$ moreover, since this case has to differ from the precedent one, we have that $z\ne 0$ (before we have also considered the case in which $l=z=k=y=0$) so in this case we can freeze $p_2$ and not $p_1$ and assign to $p_1$ and $p_3$ each half of the items of type $d$; than we assign to $p_3$ the odd $d$ item and to $p_1$ an item of type $z$, than we continue to assign items of type $z$ to $p_2$ and of type $v$ to $p_3$. When we unfreeze $p_2$, he will not envy the other two players.
+    \end{itemize}
+    \item $e$ is odd:
+    \begin{itemize}
+        \item $z,x,l,g,j=0$ in this case we can assign to $p_2$ the odd $e$ item and an item of type $y$, while to $p_3$ we assign an item of type $f$ and one of type $v$ or $w$
+        \item also $y=0$: in this case we assign to $p_2$ the odd $e$ item and an item of type $k$, while to $p_3$ we have to assign an item of type $f$ and one of type $v$ (not $w$).
+        \item also $v = 0$: in this case we cannot follow the algorithm, but in this case we have very few types of items, so we can assign the items manually as follows: we start assigning to $p_2$ the items of type $k$ (if there are, $k$ in this case could be also $0$) and $f$, while to $p_3$ we assign the items of type $e$ and since we are considering that $f+k\ge l+e$ and that $l=0$, than $k+f\ge e$ and so the $v_1(F_2)\le v_1(F_3) \le v_2(F_2)\le a-b$. So when unfrozen $p_1$ will not envy $p_2$ or $p_3$. From this we can easily obtain an EFX allocation as described in the beginning of the subsection. 
+        \item $z,x,l,g,j,f=0$: in this case we have to assign the items manually in the following manner: first we assign the items of type $d$ to both $p_2$ and $p_3$, than, since $f+k\ge l+e$ and so $k\ge e$, we assign the items of type $k$ to $p_2$ and the items of type $e$ to $p_3$, than we will assign the remaining items of type $y$ and $v$ respectively to $p_2$ and $p_3$. As before, we have that $v_1(F_2)\le v_1(F_3) \le v_2(F_2)\le a-b$ and so we can obtain an EFX allocation in the end.
+    \end{itemize}
+    \item $l,v,k=0$ and $j$ is odd: in this case we can assign the odd $j$ item to $p_3$ and $\floor{b}{c}$ items between the ones of type $x,z,w,y$ to $p_2$. In this case we can notice that $p_1$ will envy more $p_3$ but we still have that $v_1(F_2) > v_1(F_3) - c$, so by swapping with $p_2$ and not $p_3$ we still obtain EFX allocation since in the end $p_3$ does not take items in the last iteration.
+    \item $x,z,v=0$ and $l$ is odd: in this case we assign the odd $l$ item to $p_3$ and $\floor{b}{c}$ items between the ones of type $w,y$ to $p_2$. In this case holds the same thing said in the precedent point.
+    \item $y,x=0$ and $k$ odd: in this case we assign the odd $k$ item to $p_3$ and $\floor{b}{c}$ items between the ones of type $z,w$ to $p_2$. In this case holds the same thing said in the precedent point.
+\end{itemize}
+Till now I have not considered the fact that, when $p_2$ lost an item valued $a$, since $p_2$ is not taking the items following their value for him, we have that cause of the presence of some items valued $c$ b $p_2$ in $F_2$, we could reach a point in which by adding an item $g$ we have that $v_2(F_2) \le a-b-c$ and $v_2(F_2) +v_2(g)\ge a-b$ and $v_1(F_2) \le a-b-c$ and $v_1(F_2) +v_1(g)\ge a-b$. If such thing happen, than we cannot invert the assignment and obtain an EF allocation because the bundle given to $p_1$ would have value higher than $a$ for $p_2$. Such thing can happen after that $p_2$ took value $b$ for himself and $p_1$. In order to solve such problem we can divide in the following cases:
+\begin{itemize}
+    \item $\exists f=(b,c,\star)\in F_2$: in this case is enough to add $g$ to $F_2$ and remove $f$ from $F_2$, after this the value for $p_2$ of $F_2$ is increased by $b-c$ while remained constant for $p_1$, so we would have that $v_2(F_2)\ge a-b-c$ and $v_1(F_2) \le a-b$, so we can unfreeze $p_1$ and move forward. 
+    \item $(c,b,\star)\in F_2$: in this case, by excluding the precedent case, we have that is impossible have that $v_2(F_2) \le a-b-c$ and $v_2(F_2) +v_2(g)\ge a-b$ and $v_1(F_2) \le a-b-c$ and $v_1(F_2) +v_1(g)\ge a-b$, because $v_2(F_2) = v_2(F_2\setminus \{g\}) + b$ and $v_1(F_2) = v_1(F_2\setminus \{g\}) + c$ and $v_2(F_2\setminus \{g\}) \ge v_1(F_2\setminus \{g\})$, so we have in the end that $v_2(F_2) - v_1(F_2) \ge b-c$
+    \item only $(b,b,\star), (c,c,\star)\in F_2$: in this case we can remove the items that causes the shift between multiples of $b$ and the value of $F_2$ for $p_2$ and $p_1$ (in this case $v_1(F_2) = v_2(F_2)$). These items that we remove have value lower of $b$ for $p_1$ and $p_2$ and we can assign them to $p_3$ (and $p_3$ will not take the item that he would have taken in the last iteration in which we had assigned to $p_2$ the item $g$), than we assign to $F_2$ the item $g$. So now the value of $F_2$ will be lower or equal to $a-b$. 
+\end{itemize}
+In all the precedent cases we have removed an item $f$ from $F_2$ without considering the value for $p_3$ and so we could think "what if that item had value higher than the ones that already took $p_3$?" This gives no problem because we already had assumed that $p_3$ could leave an item like $g$ as last item to $p_1$ or $p_2$, so if we give such item to $p_2$ and than we assign him $f$ as last item this would make no difference to assign $f$ while $p_1$ was frozen and $g$ as last item, instead if we assign $f$ as last item to $p_1$, we know that $v_3(F_3)\ge v_3(f)$, so we still have an EFX allocation. 
+
+\paragraph{After the problematic assignment} After such problematic assignment we have a case in which we can have another problematic assignment, such case is the one in which $p_3$ has still an item valued $a$ after that $p_1$ has been unfrozen. If this happens we have that since we start from having all players that are EF towards each other except for $p_2$ that has $v_2(F_2) + c > v_2(F_1) \ge v_2(F_2)$ we have that we can obtain an EFX allocation by following the rules for such second problematic assignment. Indeed each problematic assignment has been solved by leading to an EF allocation except for the unfrozen player who can still envy the frozen one for at most $c$, so in this case is enough that if we have to chose one player to freeze between $p_1$ and $p_2$, we chose to freeze $p_2$, avoiding to let him envy for more than $c$ $p_1$.
 
 \end{document}
