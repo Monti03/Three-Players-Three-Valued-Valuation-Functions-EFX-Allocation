@@ -1,0 +1,6 @@
+# Three-Players-Three-Valued-Valuation-Functions-EFX-Allocation
+Fair division is the problem of dividing a set of resources among a set of agents in a fair manner. In the past years several fairness criteria have been introduced, with "envy freeness" to be among the most important ones.
+Informally, an allocation is envy free when no agent envies the share that another agent got.
+The main drawback of the envy-freeness criterion, is that it cannot always be guaranteed in the setting of indivisible items. For this reason, some more relaxed criteria have been introduced by the literature, two of which are envy freeness up to one good (EF1), and a stronger version of the same concept, namely, envy freeness up to any good (EFX).  Whereas there exists a polynomial time algorithm to obtain EF1 allocations for any instance, the EFX criterion remains currently more elusive, as there are only partial
+results regarding its existence.
+In this thesis, we are making steps towards improving the current state of the art for this problem, by presenting the first polynomial time algorithm for the computation of EFX allocations, under instances with three players and three values with a constraint on the values. 
