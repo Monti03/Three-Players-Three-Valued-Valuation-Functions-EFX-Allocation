@@ -1,0 +1,148 @@
+\chapter{Introduction}
+% History
+Fair division is the problem of dividing a set of resources between a set of players in order to satisfy some criterion of fairness. The theory of fair division dates back to the second world war when three Polish mathematicians, Hugo Steinhaus, Bronisław Knaster and Stefan Banach started working on the fair cake-cutting problem to find a generalization for any number of players of the divide and choose algorithm; the three developed the last diminisher procedure.
+% Real problem applications
+This problem arises in several real scenarios as distributing tasks, dividing goods \cite{DBLP:GhodsiHSSY18-real-scenarios}, frequency allocation, airport traffic management, and the fair and efficient exploitation of Earth Observation Satellites \cite{real-scenarios-2}. There are several application in order to deal with such problems and one of them is the \href{http://www.spliddit.org/}{spliddit} site that returns provably fair solutions for rent sharing, task distributions and other problems. For instance this site for the sharing rent problem, rather than divide the rent equally among the players, he asks to each of them how much they value each room and returns the allocation of the rooms and how much each player has to pay. 
+
+Sometimes other than require some fairness criteria, is required to divide the set of resources between the players by considering also two other aspects: Pareto optimality and truthfulness \cite{wiki-fair-division}. Pareto optimality, or Pareto efficient,  is a concept introduced in Economy and game theory that occurs when the allocation of the resources is such that we cannot obtain a Pareto improvement: a player cannot improve his utility without reducing the utility of another player. Truthfulness is also a concept introduced in game theory in cases in which the players have private information, we say that an asymmetric game is truthful if disclose the private information is a weakly-dominant strategy: a strategy that provides for all the players at least the same utility that they will get by playing other strategies.
+
+Fair division problem can be divided in several manners considering the type of items:
+\begin{itemize}
+    \item divisible and indivisible items,
+    \item homogeneous and heterogeneous items,
+    \item goods or bads: items with positive or negative value for the players. An example of bads can be the house chores.
+\end{itemize}
+In this thesis I am going to approach mainly the problem of indivisible items, but I will first introduce briefly the results obtained in the field of divisible items and then I am going to describe the different type of fairness criteria. 
+\section{Divisible Items}
+When considering the case of divisible items the main problem that we can think of is the fair cake-cutting problem. In this type of problem, we have to divide a heterogeneous resource between different agents. An example of this problem is when we have to divide a cake with several toppings between different people. In this problem, we consider that the resource can be divided into arbitrary small parts without destroying the value. The players to which we have to assign parts of the resource can have different preferences over the resource, so following the example of a cake with different toppings onto, we can say that the players can have different tastes. The cake is not the only example of this type of problem, land estates, advertisement space and broadcast time are few of other examples in which this type of problem raises. 
+
+As said in the beginning, Hugo Steinhaus, Bronisław Knaster and Stefan Banach have developed an algorithm called diminisher procedure that produces proportional division of an heterogeneous resource between $n$ players, so that each agent receives a part of the complete resource that he values at least $\frac{1}{n}$ of the entire value of the resource. This algorithm is an extension of the cut and choose algorithm for divisible items. The cut and choose algorithm produces EF allocation for two players by letting one player divide the resource into two parts and letting the other player choose his part. We can notice that this simple algorithm produce an EF allocation since the first player will divide the resource in such a way that he is indifferent between the two parts, and the second player will take the part with higher value for him. We can also notice that such type of algorithm is not optimal, let's say that the resource is a cake with two toppings: half chocolate and half vanilla, and that the first player prefers the chocolate, while the second one prefers the vanilla topping. In this case the first player will divide the cake so that each part has half vanilla and half chocolate, while the optimal solution was to give the chocolate half to the first player and the other one to the second one \cite{wiki-fair-division}.   
+
+\section{Indivisible Items}
+The subjective theory of value is a theory that proposes the idea that the value of each object is not defined by a property or by the production method, but instead has value determined by the importance that people give to it, for this reason in the fairness theory we tend to consider subjective concepts of fairness\cite{wiki-fair-division}. 
+Before introducing some of the most used fairness criterion let's assume that we have a set of $n$ agents $N=\{1,2,\dots,n\}$ and a set $M$ of $m$ indivisible items. Moreover, because of the subjective concept of fairness we define with $v_i$ the subjective utility function of player $i$ that assigns to each possible subset $\bar M$ of items of $M$ a value $v_i(\bar M)$. In the next pages I am going to consider that the utility functions of the players are additive functions.
+
+\subsection{Proportionality and Envy Freeness}
+We say that an allocation $\mathcal{A} = (A_1, A_2, \dots, A_n)$ is proportional if for any player $p_i$ holds that $v_i(A_i) \ge \frac{v_i(M)}{n}$. Another criteria, other than proportionality, is Envy freeness that has been introduced in \cite{Foley1967-EF} \cite{VARIAN197463-EF} and we have that an allocation $\mathcal{A} = (A_1, A_2, \dots, A_n)$ is envy-free (EF) if for every couple of players $i,j\in N, \; v_i(A_i)\ge v_i(A_j)$. 
+
+We can notice that when we have indivisible items there is not always an EF allocation or a proportional one, indeed a simple counterexample for both fairness notions is a case in which we have more than one player and only one good. In this case we have that if there are at least two players that value the only item with a value strictly larger than zero than at least one of the two, the player $p_i$ who does not get such item, will not respect the constraint of envy-freeness and proportionality because $v_i(A_i) = v_i(\emptyset) = 0$. For this reason have been introduced some relaxations of the envy-freeness and proportionality criteria: envy freeness up to one good, envy freeness up to any good, maximin share and pairwise maximin share fairness. For all of the following relaxations there exists the approximated version: we say that an allocation is $\alpha$-criteria if $v_i(A_i) \ge \alpha\;\textit{original constraint}$ with $\alpha \in [0,1]$.
+
+\subsection{Envy Freeness up to One Good}
+The first introduced relaxation of the envy-free criteria has been the envy-free up to one good criteria. This relaxation has been introduced in \cite{DBLP:LiptonMMS04-EF1} and we have that an allocation $\mathcal{A} = (A_1, A_2, \dots, A_n)$ is envy-free up to one good (EF1) if for every couple of players $i,j\in N$ with $A_j\ne \emptyset, \; \exists g\in A_j: v_i(A_i)\ge v_i(A_j\setminus \{g\})$.
+
+This relaxation of the envy-free criteria has been extensively studied and today are well known two algorithms: round robin and envy cycle elimination that respectively produce EF1 allocation in the case of additive and arbitrary monotonic valuation functions.
+
+\paragraph{Round Robin Algorithm}
+Is well known an algorithm to obtain EF1 allocations with $n$ players with additive valuation function and $m$ items, such algorithm is the round robin algorithm.
+\begin{algorithm}
+\caption{Round Robin Algorithm}\label{alg:round-robin}
+$S\gets M$\;
+\While{$S \neq \emptyset$}{
+    \For{$p_i\in N$}{
+        $g \in \argmax_{x\in S} v_i(x)$\; 
+        $S \gets S\setminus \{g\}$\;
+        $A_i \gets A_i \bigcup \{g\}$\;
+    }
+}
+\end{algorithm}
+Is easy to prove that such algorithm produces an EF1 allocation: let's consider a couple of players $i$, $j$ such that $j$ chooses before $i$. As first thing we have to notice that $|A_j| \ge |A_i|$ and that we can have only two cases:  $|A_i| = |A_j| $ or $|A_j| = |A_i| + 1$. Now let's sort the items inside $A_j$ and $A_i$ with respect to the function $v_i$. In both cases we have that the condition of \textit{EF1} must hold since we will have that $v_i(A_{i,k})\ge v_i(A_{j,k+1}) $ 
+(where $A_{x,y}$ is the y-th item in the sorted set $A_x$) since the player $i$ surely chooses the $k$-th item before the player $j$ chooses $k+1$ items. So in both cases is enough to use $g = A_{j,0}$ in order to have that the requirement holds. 
+As we can see the only difference between the case in which $|A_i| = |A_j| $ and the one in which $|A_j| = |A_i| + 1$ is that in the first one the last item of the sorted set $A_i$, $A_{i, |A_{i}|}$, does not have a related $A_{j, |A_{i}| + 1}$, while in the latter case it has. So also in both cases, by  assigning $g = A_{j,0}$ (ignoring that item) we have that 
+$$
+    \sum_{k=1}^{|A_j|} v_i(A_{j,k}) \le \sum_{k=0}^{|A_i|} v_i(A_{i,k}) 
+$$
+If instead $i$ chooses before $j$, player $i$ will always chose before $j$ so he will always have $v_i(A_i)\ge v_i(A_j)$ and so the requirement to be  \textit{EF1} holds also in this case.
+
+\paragraph{Envy Cycle Elimination}
+More generally in \cite{DBLP:LiptonMMS04-EF1} has been developed also the Envy Cycle Elimination Algorithm to compute EF1 allocations in the case in which the agents have arbitrary monotonic utilities, so in the case in which 
+$$v_i(S) \le v_i(T)\; \forall S\subseteq T\subseteq M\;\forall i\in N$$
+This algorithm is based on the definition of envy-graph of a partial allocation $\mathcal{\bar A} = (\bar A_1, \bar A_2, \dots, \bar A_n )$ as a graph where the nodes are the $n$ players and there is a direct edge between $p_i$ and $p_j$ only if $p_i$ envies $p_j$: $v_i(A_i) < v_i(A_j)$. From this definition we can notice that if $p_i$ is a source of the graph, he is not envied by any player, so if we start from a partial EF1 allocation, construct its envy-graph and assign one not allocated item to a player that is a source, the result is still an EF1 allocation since no agent envies the bundle of this player when we remove the last added item because it was a source. It can happen that there is no source in the envy-graph, than if there are edges, there must be a cycle: in order to deal with the cycles is enough to rotate the bundles along the cycle. When we remove a cycle we can notice that, since no other edge will be created because we are not changing the bundles but only changing the owner and each player involved in the bundle swap will increase its utility, the number of edges in the graph will decrease at least by the number of edges in the cycle and this implies the fact that the algorithm terminates.
+
+\begin{algorithm}
+\caption{Envy-Cycle Elimination Algorithm}\label{alg:Envy-CycleElimination}
+$S\gets M$\;
+$\mathcal{\bar A}\gets (\emptyset, \emptyset, \dots,\emptyset)$\;
+\While{$S \neq \emptyset$}{
+   \While{There is a cycle}{
+        remove such cycle;
+    } 
+    //since there are no cycles there must be a source\;
+    allocate item $g\in R$ to a source player\;
+}
+\end{algorithm}
+
+\subsection{Maxmin Share}
+This fairness criteria has been introduced in \cite{DBLP:Budish10-mms} and is a relaxation of the proportionality criteria introduced for the same reason of the EF1 criteria: with indivisible items we cannot always reach proportionality. In order to describe this cirteria we have to introduce the definition of \textit{n-maximin share} of agent $i$ as $\boldsymbol \mu_i = \max_{\mathcal{A} \in \prod_n(M)} \min_{A_j\in \mathcal{A}} v_i(A_j)$. We say that an allocation $\mathcal{A} = (A_1, A_2, \dots, A_n)$ respect the maxmin share criterion if $$\forall i\in N:\; v_i(A_i) \ge \boldsymbol \mu_i$$
+
+\subsection{Pairwise Maximin Share Fairness}
+Introduced in \cite{DBLP:/CaragiannisKMP016-EFX-PMMS}, we say that an allocation $\mathcal{A} = (A_1, A_2, \dots, A_n)$ respects the pairwise maximin share (PMMS) criteria if, considering $(B_i, B_j)\in \prod_2(A_i\cup A_j)$,  $\forall i,j\in N$ holds that 
+$$
+v_i(A_i) \ge \max_{(B_1, B_2)} \min \{v_i(B_1), v_i(B_2)\}
+$$
+
+\subsection{Envy Freeness up to Any Good}
+Envy Freeness up to any good is a relaxation of the envy-free criteria that is much stronger than the EF1 and has been introduced because this kind of allocation are good approximation to the EF ones.  
+This relaxation has been introduced in \cite{DBLP:/CaragiannisKMP016-EFX-PMMS} \cite{DBLP:GourvesMT14-EFX} and we have that an allocation $\mathcal{A} = (A_1, A_2, \dots, A_n)$ is envy-free up to any good (EFX) if for every couple of players $i,j\in N$ with $A_j\ne \emptyset, \; \forall g\in A_j: v_i(A_i)\ge v_i(A_j\setminus \{g\})$.
+
+In the last years this criteria has been extensively studied: 
+\begin{itemize}
+    \item in 2016 has been given a formal definition,
+    \item in 2018 has been shown that with the divide and choose algorithm \cite{DBLP:cut-and-choose-indivisible} we can obtain EFX for two players or $n$ players with identical valuation functions.
+    \item in 2019 has been shown that we can build allocations that are EFX and have at least half of the maximum possible Nash Welfare by assigning to the agents only a subset of the items and giving the remaining ones to charity \cite{DBLP:efx-charity}.  
+    \item in 2020 has been shown that for $3$ players always exists an EFX allocation \cite{DBLP:3p-efx-existance}.
+\end{itemize}
+
+So summarizing till now we have the following results with respect to the number of agents:
+\begin{itemize}
+    \item $2$ players: the divide and choose algorithm \cite{DBLP:cut-and-choose-indivisible} produces an EFX allocation in polynomial time.
+    \item $3$ players: always exists an EFX allocation, but till now we only have a pseudo-polynomial algorithm \cite{DBLP:3p-efx-existance}.
+    \item $\ge4$ players: there exists an EFX allocation if we consider only a subset of the entire set of items \cite{DBLP:efx-charity}.
+\end{itemize}
+
+Other than this, in \cite{DBLP:BarmanM17-efx-same-ordering} has been shown that when the values of the items have the same ordering for the players than EFX allocation exists and that such EFX allocation is also a $\frac{2}{3}$-MMS allocation. Instead in \cite{DBLP:PlautR17-1/2-EFX-approx} has been proposed an algorithm to obtain $\frac{1}{2}$-EFX allocation when players have sub-additive valuations.
+Finally in  \cite{DBLP:MaximumNashWelfareandOtherStoriesAboutEFX} has been proposed a modified version of the round robin algorithm that obtains EFX allocation in the case of additive valuation functions where for each player $p_i$ the values of the items in $M$ have value in the range $[x_i, 2x_i]\; x_i\in R_{>0}$.
+
+\paragraph{Cut and Choose Algorithm}
+The cut and choose algorithm introduced, for indivisible items, in \cite{DBLP:cut-and-choose-indivisible} produces EFX allocation for two players with additive valuation functions and is described in \ref{alg:cut-and-choose}. In this algorithm we use the \textit{Leximin++Solution} function that, given the number of partitions, the set of items, and the valuation function of $p_1$ returns, in the case of $2$ players, two set of items that are EFX for $p_1$. 
+\begin{algorithm}
+\caption{Cut and Choose Algorithm}\label{alg:cut-and-choose}
+$(A_1, A_2) \gets$ Leximin++Solution($2, M, v_1$)\;
+\eIf{$v_2(A_1) \ge v_2(A_2)$}{
+ return ($A_2, A_1$)\;
+}
+{
+ return ($A_1$, $A_2$)\;
+}
+\end{algorithm}
+
+\subsection{Relations among the fairness criteria}
+
+\begin{figure}[h]
+\[\begin{tikzcd}
+  &&& {\frac{2}{3}\text{-}PMMS} & {\frac{1}{2}\text{-}EF1} & {\frac{1}{2n-1}\text{-}MMS} \\
+  EF & PMMS & EFX & {\frac{4}{7}\text{-}MMS } & {\frac{1}{n}\text{-}MMS} & {\frac{1}{3}\text{-}EF1} \\
+  &&& EF1 & {\frac{1}{2}\text{-}PMMS} & {\frac{1}{3n-2}\text{-}MMS}
+  \arrow[Rightarrow, from=2-1, to=2-2]
+  \arrow[Rightarrow, from=2-3, to=2-4]
+  \arrow[Rightarrow, from=2-3, to=1-4]
+  \arrow[Rightarrow, from=2-3, to=3-4]
+  \arrow[Rightarrow, from=1-4, to=1-5]
+  \arrow[Rightarrow, from=1-5, to=1-6]
+  \arrow[Rightarrow, from=3-4, to=3-5]
+  \arrow[Rightarrow, from=3-4, to=2-5]
+  \arrow[Rightarrow, from=3-5, to=3-6]
+  \arrow[Rightarrow, from=3-5, to=2-6]
+  \arrow[Rightarrow, from=2-2, to=2-3]
+\end{tikzcd}
+\]
+\caption{Relations among the fairness criteria}
+\label{fig:relations-fairness-criteria}
+\end{figure}
+The relations shown in Figure \ref{fig:relations-fairness-criteria} is the summary of several works: in \cite{DBLP:/CaragiannisKMP016-EFX-PMMS} has been shown that $EF\implies PMMS\implies EFX \implies EF1$, instead in \cite{DBLP:ComparingApproximateRelaxationsofEnvy-Freeness} has been shown that in the case of $n\in \{2,3\}$ $EFX\implies \frac{2}{3}\textit{-MMS}$, instead in the case of $n\ge 4$ $EFX\implies \frac{4}{7}\textit{-MMS}$. 
+
+In \cite{DBLP:ComparingApproximateRelaxationsofEnvy-Freeness} has also been analyzed which kind of allocation are implied when we have an $\alpha$-EF1 or $\alpha$-PMMS allocation.
+In the case of $\alpha$-EF1 allocation they proved that for any $\alpha\in (0,1]$ an $\alpha$-EF1 allocation is also a $\frac{\alpha}{n-1+\alpha}$-MMS allocation and that $\alpha$-EF1$\implies \frac{\alpha}{1+alpha}$-PMMS for $n\ge 3$.
+In the case of $\alpha$-PMMS allocation they proved that for any $\alpha\in (0,1)$ we have that $\alpha\textit{-}PMMS\implies \frac{\alpha}{2-\alpha}\textit{-}EF1$ and that considering also $n\ge 3$ any $\alpha$-PMMS is also an $\frac{\alpha}{2(n-1) -\alpha(n-2)}$-MMS.
+
+\subsection{Thesis Objective}
+In this thesis I am going to first show that, starting from the Match\&Freeze algorithm, we can obtain EFX allocation for two players and valuation functions that value each item with one out of three possible values. After this, since we already have an algorithm that, given two players and more general valuation functions, produces EFX allocation, I am going to show how to obtain EFX allocation in polynomial time for three players and valuation functions that value each item with one out of three possible values with some other constraint.

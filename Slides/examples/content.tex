@@ -1,0 +1,271 @@
+% !TEX encoding = UTF-8
+% !TEX program = pdflatex
+% !TEX spellcheck = en_US
+% !TEX root = roma-demo.tex
+
+\begin{frame}[t,plain]
+\titlepage
+\end{frame}
+
+\begin{frame}{Introduction}
+    This thesis is about the Fair Division Problem. Such problem arises in several everyday task:
+    \begin{itemize}
+        \item Divide Goods
+        \item Distribute Tasks
+        \item Frequency Allocation
+        \item ...
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Table of contents}
+\tableofcontents
+\end{frame}
+
+\AtBeginSection[]
+{
+\begin{frame}<beamer>
+\frametitle{Outline}
+\tableofcontents[currentsection]
+\end{frame}
+}
+
+\section{Definitions}
+
+
+\begin{frame}{Preliminaries}
+    \begin{itemize}
+        \item Set $N$ of $n$ agents
+        \item Set $M$ of $m$ indivisible goods
+        \item $v_i(\cdot)$ is the valuation function of player $i$
+        \item $\mathcal{A} = (A_1, \dots, A_n)$ is a partition of the goods, $A_i$ is the set associated to player $i$.
+        \item The task is producing an allocation that respects a fairness notion for each player.
+    \end{itemize}
+\end{frame}
+
+
+%---------------------------------------------------------
+%ENVY FREE
+%---------------------------------------------------------
+\begin{frame}
+\frametitle{Envy Free}
+\begin{itemize}
+    \item An allocation $\mathcal{A} = (A_1, A_2, \dots, A_n)$ is envy-free (EF) if 
+$$\forall i,j\in N, \; v_i(A_i)\ge v_i(A_j)$$
+    
+    \item There is \textbf{not} always a possible EF allocation for indivisible items. Example: one item and two players that value such item more than zero.
+    
+    \item Because of the impossibility of computing EF allocation in some cases, have been introduced two relaxations of this criterion: \textit{envy free up to one item} and \textit{envy free up to any item}. 
+
+\end{itemize}
+\end{frame}
+
+
+%---------------------------------------------------------
+%ENVY FREE UP TO ONE GOOD
+%---------------------------------------------------------
+\begin{frame}{Envy Free Up to One Item}
+\frametitle{Envy Free Up to One Item}
+\begin{itemize}
+    \item An allocation $\mathcal{A} = (A_1, A_2, \dots, A_n)$ is envy-free up to one good (EF1) if
+$$\forall i,j\in N, A_j\ne \emptyset, \; \exists g\in A_j: v_i(A_i)\ge v_i(A_j\setminus \{g\})$$
+
+    \item Exists an algorithm that is capable of computing EF1 allocation in polynomial time in the case of monotone valuation functions.
+    
+\end{itemize}
+
+\end{frame}
+
+%---------------------------------------------------------
+%ENVY FREE UP TO ANY ITEM
+%---------------------------------------------------------
+\begin{frame}{Envy Free Up to Any Item}
+\frametitle{Envy Free Up to Any Item}
+\begin{itemize}
+    \item An allocation $\mathcal{A} = (A_1, A_2, \dots, A_n)$ is envy-free up to any good (EFX) if 
+$$\forall i,j\in N,  A_j\ne \emptyset, \; \forall g\in A_j: v_i(A_i)\ge v_i(A_j\setminus \{g\})$$
+    \item This is a much stronger version of the EF1 criteria: in the case of additive function 
+    \begin{itemize}
+        \item EF1: remove from $A_j$ item $argmax_{x\in A_j} v_i(x)$
+        \item EFX: remove from $A_j$ item $argmin_{x\in A_j} v_i(x)$
+    \end{itemize}
+    
+\end{itemize}
+
+\end{frame}
+
+
+
+%---------------------------------------------------------
+% EFX SECTION
+%---------------------------------------------------------
+\section{Envy Free up to Any Item}
+\begin{frame}{Envy Free Up to Any Item Recent Studies}
+\frametitle{Envy Free Up to Any Item Recent Studies}
+In the last years this criteria has been extensively studied: 
+\begin{itemize}
+    \item in 2016 has been given a formal definition \cite{DBLP:/CaragiannisKMP016-EFX-PMMS},
+    \item in 2018 has been shown that with the divide and choose algorithm  we can obtain EFX for two players or $n$ players with identical valuation functions\cite{DBLP:cut-and-choose-indivisible}.
+    \item in 2019 has been shown that we can build allocations that are EFX and have at least half of the maximum possible Nash Welfare by assigning to the agents only a subset of the items and giving the remaining ones to charity\cite{DBLP:efx-charity}.  
+    \item in 2020 has been shown that for $3$ players always exists an EFX allocation\cite{DBLP:3p-efx-existance}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Envy Free Up to Any Item Results}
+\frametitle{Envy Free Up to Any Item Results}
+So summarizing till now we have the following results with respect to the number of agents:
+\begin{itemize}
+    \item $2$ players: the divide and choose algorithm produces an EFX allocation in polynomial time\cite{DBLP:cut-and-choose-indivisible}.
+    \item $3$ players: always exists an EFX allocation, but till now we only have a pseudo-polynomial algorithm\cite{DBLP:3p-efx-existance}.
+    \item $\ge4$ players: there exists an EFX allocation if we consider only a subset of the entire set of items\cite{DBLP:efx-charity}.
+\end{itemize}
+\end{frame}
+
+%---------------------------------------------------------
+% MY WORK SECTION
+%---------------------------------------------------------
+\section{Our Results}
+\begin{frame}{Match\&Freeze Algorithm}
+\frametitle{Match\&Freeze Algorithm}
+The work proposed in this thesis is based on the Match\&Freeze Algorithm\cite{DBLP:MaximumNashWelfareandOtherStoriesAboutEFX}
+\begin{itemize}
+    \item Produces EFX allocation for $n$ players with additive valuation functions that value each item with one out of two possible values.
+    \item Is based on two concepts: assign items at each iteration with the maximum matching algorithm and if one player envies another freeze the envied player.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Our Work}
+\frametitle{Our Work}
+In this thesis we have done the two following things:
+\begin{itemize}
+    \item We have build a modified version of the Match\&Freeze algorithm that works with additive valuation functions with three values and two players.
+    \item We have exploited the freezing technique to show how to obtain EFX allocation for three players and additive valuation functions with three values with some constraint over the values.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Counterexample of the Match\&Freeze Algorithm for Three Values}
+\frametitle{Counterexample of the Match\&Freeze Algorithm for Three Values}
+Example showing that the Match\&Freeze algorithm does not work when there are three values valuation functions 
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+      & $i_1$ & $i_2$ & $i_3$ & $i_4$ & $i_5$ \\ \hline
+$p_1$ & 100 & $50$   & $50$   & $50$   & $50$   \\ \hline
+$p_2$ & $50$   & 1   & 1   & 1   & 1   \\ \hline
+\end{tabular}
+\end{table}
+
+\end{frame}
+
+\begin{frame}{Counterexample of the Match\&Freeze Algorithm for Three Values}
+\frametitle{Counterexample of the Match\&Freeze Algorithm for Three Values}
+
+By following the Match\&Freeze algorithm we obtain the allocation shown in bold in table \ref{table:counter-example-match-and-freeze-three-values}. This is not an EFX allocation since 
+$$v_1(A_1) = 100 < v_1(A_2\setminus \{i_2\}) = 150$$
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+      & $i_1$ & $i_2$ & $i_3$ & $i_4$ & $i_5$ \\ \hline
+$p_1$ & \textbf{100}   & $50$   & $50$   & $50$   & $50$   \\ \hline
+$p_2$ & $50$   & \textbf{1}   & \textbf{1}   & \textbf{1}   & \textbf{1}   \\ \hline
+\end{tabular}
+\caption{Counter example for the Match\&Freeze algorithm}
+\label{table:counter-example-match-and-freeze-three-values}
+\end{table}
+
+\end{frame}
+
+\begin{frame}{Match\&Freeze++ Algorithm for Three Values}
+The main idea is:
+\begin{itemize}
+    \item We execute the original algorithm till the end
+    \item If we do not obtain an EFX allocation we rollback to the iteration in which we freeze a player and change the assignment ignoring maximum matching.
+\end{itemize}
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+      & $i_1$ & $i_2$ & $i_3$ & $i_4$ & $i_5$ \\ \hline
+$p_1$ & 100   & \textbf{50}   & \textbf{50}   & 50   & \textbf{50}   \\ \hline
+$p_2$ & \textbf{50}   & 1   & 1   & \textbf{1}   & 1   \\ \hline
+\end{tabular}
+\caption{Match\&Freeze++ algorithm}
+\label{table:counter-example-match-and-freeze-three-values-fixed}
+\end{table}
+\end{frame}
+
+\begin{frame}{Modification for Two Players}
+ \begin{itemize}
+        \item Introduce the concept of \textbf{problematic assignment} as an assignment after which the original algorithm could not produce an EFX allocation.
+        \item If we do not obtain an EFX allocation we rollback to the problematic assignment, invert the assignment and resume the algorithm.
+        \item Redefine the number of iterations for which a player is frozen and the items that a non frozen player takes while the other is frozen.
+        
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Three Players and Three Values Problems}
+    \begin{enumerate}
+        \item We introduce a constraint over the three values
+        \item In the case of three players we cannot use maximum matching to assign the items while a player is frozen. 
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Three Players and Three Values Constraint on the Values}
+    Considering that the three values are $a > b > c$ we have the following constraint
+    $$
+        c\ge a \mod b
+    $$
+    Without such constraint we could have that the two non frozen player start to envy each other because of how we assign the items while a player is frozen.
+\end{frame}
+
+\begin{frame}{Three Players Three Values Maximum Matching}
+
+The allocation shown in the following table is not EFX since $p_1$ envies $p_3$: $A_1 = \{i_1, i_{14}\}$, $A_3 = \{i_3, i_4, i_6, i_8, i_{10}, i_{12}\}$ and we have that $v_1(A_1) = 440$ $v_1(A_3\setminus\{i_{12}\}) = 500$
+
+$$\;$$
+
+\resizebox{\textwidth}{!}{%
+\begin{table}[]
+\begin{tabular}{|l|l|l|l||l|l|l|l|l|l|l|l||l|l|l|}
+\hline
+& $i_1$& $i_2$ & $i_3$ & $i_4$ & $i_5$  & $i_6$ & $i_7$ & $i_8$ & $i_9$ & $i_{10}$ & $i_{11}$ & $i_{12}$& $i_{13}$& $i_{14}$\\ \hline
+
+$p_1$ & \textbf{400} & 100 & 100 & 100 & 40 & 100 & 40 & 100 & 40 & 100 & 40 & 40 & 40 & \textbf{40} \\ \hline
+
+$p_2$ & 400 & \textbf{100} & 100 & 100 & \textbf{100} & 100 & \textbf{100} & 40 & \textbf{40} & 40 & \textbf{40} & 40 & \textbf{40} & 40 \\ \hline
+
+$p_3$ & 100 & 100 & \textbf{100} & \textbf{100} & 100 & \textbf{100} & 100 & \textbf{100} & 40 & \textbf{100} & 40 & \textbf{40} & 40 & 40\\ \hline
+\end{tabular}
+\end{table}
+}
+\end{frame}
+
+\begin{frame}{Three Players Three Values Maximum Matching}
+\begin{itemize}
+    \item If we freeze $p_2$ rather than $p_1$ we could obtain the a similar allocation that is not EFX since as we can notice if we invert $p_1$ and $p_2$  we have the same number of items for each remaining type.
+    \item A type is a class of items represented by a triple with the value for each player for such class of items in order.
+    \item So I had to define the order of the items to assign to the non frozen players while a player was frozen.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Approach used for the Three Player Case}
+    I have divided the problematic assignments in two types:
+    \begin{itemize}
+        \item two players envy the frozen player: in such a case I have solved the different problematic assignments one by one, by defining which items give to which players.
+        \item only one player envies the frozen player: in such a case I have defined a unique algorithm.
+        \begin{itemize}
+            \item The player that does not envy the others chooses the type of item.
+            \item The other non frozen player takes an item of the same type.
+            \item The frozen player will envy or both or none of the two non frozen players.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+\frametitle{Bibliography}
+\printbibliography
+
+\end{frame}

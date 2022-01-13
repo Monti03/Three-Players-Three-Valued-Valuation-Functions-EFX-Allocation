@@ -1,0 +1,123 @@
+% !TeX encoding = UTF-8
+% !TeX program = pdflatex
+% !TeX spellcheck = en_US
+
+\documentclass[LaM,binding=0.6cm]{sapthesis}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+
+%%%%%%%%%%Added these packages-Commands%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[ruled,vlined,linesnumered]{algorithm2e}
+\usepackage{enumitem}
+\usepackage{libertine}
+\usepackage{amssymb,amsmath,amsfonts,amstext,amsthm}
+\usepackage{hyperref}
+\usepackage[svgnames]{xcolor}
+\usepackage[capitalise,nameinlink]{cleveref}
+\hypersetup{colorlinks={true},linkcolor={DarkBlue},citecolor=[named]{DarkGreen}}
+\usepackage{tikz}
+\newcommand{\gb}[1]{{\color{red}[GB: #1]}}
+%%%%%%%%%%%%%%%%End of the added packages-Commands%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage[style=alphabetic]{biblatex}
+\RequirePackage[nottoc]{tocbibind}
+\RequirePackage{bibentry}
+
+\bibliography{cit}
+
+
+\newcommand{\floor}[3][2]{\left \lfloor\frac{#2}{#3}\right \rfloor}
+\newcommand{\ceil}[3][2]{\left \lceil\frac{#2}{#3}\right \rceil}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\usepackage{microtype}
+
+\usepackage{hyperref}
+
+%\hypersetup{pdftitle={Thesis Title},pdfauthor={Francesco Montano}}
+
+% Remove in a normal thesis
+\usepackage{lipsum}
+\usepackage{curve2e}
+\definecolor{gray}{gray}{0.4}
+\newcommand{\bs}{\textbackslash}
+
+\usepackage{tikz-cd}
+
+% Commands for the titlepage
+\title{On the polynomial computation of EFX allocations for 3 agents and 3-valued instances}
+\author{Francesco Montano}
+\IDnumber{1744183}
+\course{Engineering in Computer Science}
+\courseorganizer{Facolt\`{a} di Ingegneria dell'informazione,
+informatica e statistica}
+\AcademicYear{2020/2021}
+\copyyear{2021}
+\advisor{Prof. Aris Anagnostopoulos}
+\coadvisor{Dr. Georgios Birmpas}
+
+\authoremail{montano.1744183@studenti.uniroma1.it}
+
+%\examdate{16 April 2013}
+%\examiner{Prof. Nome Cognome}
+%\examiner{Prof. Nome Cognome}
+%\examiner{Dr. Nome Cognome}
+\versiondate{\today}
+
+
+
+\begin{document}
+
+\frontmatter
+
+\maketitle
+
+
+\begin{abstract}
+Fair division is the problem of dividing a set of resources among a set of agents in a fair manner. In the past years several fairness criteria have been introduced, with "envy freeness" to be among the most important ones.
+Informally, an allocation is envy free when no agent envies the share that another agent got.
+The main drawback of the envy-freeness criterion, is that it cannot always be guaranteed in the setting of indivisible items. For this reason, some more relaxed criteria have been introduced by the literature, two of which are envy freeness up to one good (EF1), and a stronger version of the same concept, namely, envy freeness up to any good (EFX).  Whereas there exists a polynomial time algorithm to obtain EF1 allocations for any instance, the EFX criterion remains currently more elusive, as there are only partial
+results regarding its existence.
+In this thesis, we are making steps towards improving the current state of the art for this problem, by presenting the first polynomial time algorithm for the computation of EFX allocations, under instances with three players and three values with a constraint on the values. 
+\end{abstract}
+
+
+%\begin{acknowledgments}
+
+%\end{acknowledgments}
+
+\tableofcontents
+
+
+%\chapter{Capitolo non numerato}
+
+%\section*{Paragrafo non numerato}
+\mainmatter
+
+\include{tex/introduction}
+
+\include{tex/3v2p}
+
+\include{tex/3v3p}
+
+\include{tex/conclusions}
+
+\backmatter
+
+
+
+% bibliography
+%\cleardoublepage
+%\phantomsection
+%\bibliographystyle{sapthesis} % BibTeX style
+%\bibliography{bibliography} % BibTeX database without .bib extension
+
+\printbibliography
+
+\end{document}
